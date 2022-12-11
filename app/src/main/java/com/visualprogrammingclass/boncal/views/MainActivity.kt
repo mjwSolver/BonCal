@@ -28,6 +28,7 @@ import com.visualprogrammingclass.boncal.ui.theme.BonCalTheme
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BonCalTheme {
-//                SetupNavGraph(navController = rememberNavController())
+               SetupNavGraph(navController = rememberNavController())
 
                 // A surface container using the 'background' color from the theme
                 Surface(

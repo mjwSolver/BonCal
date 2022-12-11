@@ -25,8 +25,8 @@ fun RegisterScreen(theContext: Context){
         val theName: State<String> = registViewModel.name.observeAsState("")
         val theToken: State<String> = registViewModel.token.observeAsState("")
 
-        Text(text = "$theName")
-        Text(text = "$theToken")
+        Text(text = theName.value)
+        Text(text = theToken.value)
 
         val loginDetails = LoginDetail("rama@rama-adi.dev", "password", true )
         registViewModel.loginThisUser(theContext, loginDetails)
