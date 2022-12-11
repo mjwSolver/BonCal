@@ -1,6 +1,6 @@
 package com.visualprogrammingclass.boncal.models
 
-data class loginrequest(
+data class userdata(
     val email: String,
     val name: String,
     val password: String,

@@ -1,7 +1,6 @@
 package com.visualprogrammingclass.boncal.retrofit
 
 import com.visualprogrammingclass.boncal.helper.Const
-import com.visualprogrammingclass.boncal.retrofit.EndPointAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

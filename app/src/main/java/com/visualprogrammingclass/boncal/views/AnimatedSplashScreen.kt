@@ -26,7 +26,8 @@ import kotlinx.coroutines.delay
 fun AnimatedSplashScreen(navController: NavHostController){
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnim = animateFloatAsState(
-        targetValue = if(startAnimation) 1f else 0f, animationSpec= tween(durationMillis = 3000)
+        targetValue = if(startAnimation) 1f else 0f,
+        animationSpec = tween(durationMillis = 3000)
     )
     LaunchedEffect(key1 = true){
         startAnimation = true
@@ -57,6 +58,7 @@ fun Splash(alpha:Float) {
             ),
             contentDescription = "boncallogo.png",
             contentScale = ContentScale.FillHeight,
+            alpha = alpha,
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()

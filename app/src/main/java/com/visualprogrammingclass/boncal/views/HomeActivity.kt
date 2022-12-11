@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeActivity() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-//        Text(text = "Home", color = MaterialTheme.typography.h3.fontSize, fontWeight = FontWeight.Bold)
+        Text(text = "Home", color = MaterialTheme.typography.bodySmall.color, fontWeight = FontWeight.Bold)
     }
 }
 
