@@ -9,3 +9,15 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val green = Color(0xFF22C55E) // Green400
+val LightTeal = Color(0xFF14B8A6) // Teal500
+val DarkTeal = Color(0xFF115E59) // Teal800
+
+// Logo Colors
+val Blue400 = Color(0xFF60A5FA)
+val Emerald400 = Color(0xFF34D399)
+
+// Basic Light and Dark
+val Slate50 = Color(0xFFF8FAFC)
+val Slate900 = Color(0xFF0F172A)
