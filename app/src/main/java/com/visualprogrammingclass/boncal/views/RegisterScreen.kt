@@ -25,11 +25,22 @@ fun RegisterScreen(theContext: Context) {
         val registViewModel: RegisterViewModel = viewModel()
 //            ViewModelProvider()[RegisterViewModel::class.java]
 
-        val theName: State<String> = registViewModel.name.observeAsState("")
+        val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
         val theToken: State<String> = registViewModel.token.observeAsState("")
+        val theName: State<String> = registViewModel.name.observeAsState("")
 
-        Text(text = "Generated token Name ${theName.value}", color = UseColor(dark = Slate50, light = Slate900))
-        Text(text = "Generated token Value ${theToken.value}", color = UseColor(dark = Slate50, light = Slate900))
+        Text(
+            text = "Generated token Name ${theTokenName.value}",
+            color = UseColor(dark = Slate50, light = Slate900)
+        )
+        Text(
+            text = "Generated token Value ${theToken.value}",
+            color = UseColor(dark = Slate50, light = Slate900)
+        )
+        Text(
+            text = "The user ${theName.value}",
+            color = UseColor(dark = Slate50, light = Slate900)
+        )
 
         Button(onClick = {
             val loginDetails = LoginDetail("rama@rama-adi.dev", "password", true)
