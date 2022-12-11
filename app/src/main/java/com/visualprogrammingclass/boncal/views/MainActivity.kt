@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal
+package com.visualprogrammingclass.boncal.views
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
