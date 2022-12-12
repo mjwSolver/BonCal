@@ -23,13 +23,13 @@ import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import kotlinx.coroutines.delay
 
 @Composable
-fun AnimatedSplashScreen(navController: NavHostController){
+fun AnimatedSplashScreen(navController: NavHostController) {
     var startAnimation by remember { mutableStateOf(false) }
     val alphaAnim = animateFloatAsState(
-        targetValue = if(startAnimation) 1f else 0f,
+        targetValue = if (startAnimation) 1f else 0f,
         animationSpec = tween(durationMillis = 3000)
     )
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         startAnimation = true
         delay(5000)
         navController.popBackStack()
@@ -39,13 +39,13 @@ fun AnimatedSplashScreen(navController: NavHostController){
 }
 
 @Composable
-fun Splash(alpha:Float) {
+fun Splash(alpha: Float) {
     Box(
         modifier = Modifier
             .background(if (isSystemInDarkTheme()) Slate900 else Slate50)
             .fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
 //        Icon(
 //            modifier = Modifier.size(120.dp).alpha(alpha = alpha),
 //            imageVector = Icons.Default.Email,
@@ -53,7 +53,8 @@ fun Splash(alpha:Float) {
 //            tint = Color.White
 //        )
         Image(
-            painter = painterResource(id =
+            painter = painterResource(
+                id =
                 if (isSystemInDarkTheme()) boncallogolight else boncallogodark
             ),
             contentDescription = "boncallogo.png",
@@ -69,12 +70,12 @@ fun Splash(alpha:Float) {
 
 @Composable
 @Preview
-fun SplashScreenPreview(){
+fun SplashScreenPreview() {
     Splash(alpha = 1f)
 }
 
 @Composable
 @Preview(uiMode = UI_MODE_NIGHT_YES)
-fun SplashScreenDarkPreview(){
+fun SplashScreenDarkPreview() {
     Splash(alpha = 1f)
 }
