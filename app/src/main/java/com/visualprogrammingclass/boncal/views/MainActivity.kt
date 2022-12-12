@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BonCalTheme {
-               SetupNavGraph(navController = NavHostController(this))
+//               SetupNavGraph(navController = NavHostController(this))
 
                 // A surface container using the 'background' color from the theme
                 Surface(
