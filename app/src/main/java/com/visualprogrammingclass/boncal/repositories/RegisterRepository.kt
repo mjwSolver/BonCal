@@ -9,7 +9,7 @@ import javax.inject.Inject
 class RegisterRepository @Inject constructor(private val api: EndPointAPI) {
 
     // Register / Sign up = New User
-//    suspend fun creatingNewUser(userData: userdata) = api.createNewUser(userData)
+//    suspend fun registerUser(userData: userdata) = api.createNewUser(userData)
 
     // Login-in
     suspend fun loginUser(loginDetail: LoginDetail) = api.loginUser(loginDetail)

@@ -3,6 +3,7 @@ package com.visualprogrammingclass.boncal.views
 import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +20,7 @@ import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
 
 @Composable
-fun RegisterScreen(theContext: Context) {
+fun  RegisterScreen(theContext: Context) {
     Column(modifier = Modifier.padding(16.dp)) {
 
         val registViewModel: RegisterViewModel = viewModel()
@@ -50,7 +51,16 @@ fun RegisterScreen(theContext: Context) {
         }
 
 
+
+
     }
+}
+
+@Composable
+fun EmailTextInputLayout(
+
+){
+//    OutlinedTextField(value = "", onValueChange = , )
 }
 
 @Composable
