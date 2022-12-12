@@ -2,6 +2,8 @@ package com.visualprogrammingclass.boncal.viewModels
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,6 +47,8 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
             }
         }
     }
+
+//    fun
 
 
 }

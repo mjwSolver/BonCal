@@ -2,15 +2,11 @@ package com.visualprogrammingclass.boncal.views
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Icon
-import android.widget.NumberPicker.OnValueChangeListener
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.TextFieldColorsWithIcons
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
@@ -28,41 +24,30 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.visualprogrammingclass.boncal.helper.statics
 import com.visualprogrammingclass.boncal.models.LoginDetail
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
-import kotlinx.coroutines.flow.first
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import com.visualprogrammingclass.boncal.helper.statics
 import java.util.prefs.Preferences
 
 @Composable
 fun  RegisterScreen(theContext: Context) {
-    Column(modifier = Modifier.padding(16.dp)) {
-//        dataStore = DataStore(name = "Setting")
 
-        // At the top level of your kotlin file:
-//        val dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+    val registViewModel: RegisterViewModel = viewModel()
+    val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
+    val theToken: State<String> = registViewModel.token.observeAsState("")
+    val theName: State<String> = registViewModel.name.observeAsState("")
+
+    Column(modifier = Modifier.padding(16.dp)) {
 
         if(statics.logged){
             Intent(theContext, RegisterActivity::class.java).let {
                 theContext.startActivity(it)
             }
         }
-
-        val registViewModel: RegisterViewModel = viewModel()
-//            ViewModelProvider()[RegisterViewModel::class.java]
-
-        val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
-        val theToken: State<String> = registViewModel.token.observeAsState("")
-        val theName: State<String> = registViewModel.name.observeAsState("")
 
         statics.token = theToken.value
 
