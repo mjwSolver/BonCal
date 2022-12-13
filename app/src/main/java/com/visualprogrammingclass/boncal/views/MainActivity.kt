@@ -14,11 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.visualprogrammingclass.boncal.helper.statics
-import com.visualprogrammingclass.boncal.navigations.SetupNavGraph
+import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.ui.theme.BonCalTheme
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900

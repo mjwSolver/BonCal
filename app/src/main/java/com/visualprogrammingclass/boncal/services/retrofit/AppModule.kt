@@ -1,6 +1,6 @@
-package com.visualprogrammingclass.boncal.retrofit
+package com.visualprogrammingclass.boncal.services.retrofit
 
-import com.visualprogrammingclass.boncal.helper.Const
+import com.visualprogrammingclass.boncal.helpers.Const
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

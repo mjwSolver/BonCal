@@ -24,14 +24,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.visualprogrammingclass.boncal.helper.statics
+import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.models.LoginDetail
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
-import java.util.prefs.Preferences
 
 @Composable
 fun  RegisterScreen(theContext: Context) {

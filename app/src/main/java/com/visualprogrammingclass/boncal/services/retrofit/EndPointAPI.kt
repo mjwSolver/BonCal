@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.retrofit
+package com.visualprogrammingclass.boncal.services.retrofit
 
 import com.visualprogrammingclass.boncal.models.*
 import okhttp3.RequestBody

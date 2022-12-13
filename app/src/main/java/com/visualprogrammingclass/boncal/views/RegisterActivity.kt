@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import com.visualprogrammingclass.boncal.navigations.SetupNavGraph
+import com.visualprogrammingclass.boncal.services.navigations.SetupNavGraph
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.views.ui.theme.BonCalTheme

@@ -2,7 +2,7 @@ package com.visualprogrammingclass.boncal.repositories
 
 import com.visualprogrammingclass.boncal.models.LoginDetail
 import com.visualprogrammingclass.boncal.models.userdata
-import com.visualprogrammingclass.boncal.retrofit.EndPointAPI
+import com.visualprogrammingclass.boncal.services.retrofit.EndPointAPI
 import javax.inject.Inject
 
 

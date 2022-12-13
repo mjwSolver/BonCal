@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.navigations
+package com.visualprogrammingclass.boncal.services.navigations
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

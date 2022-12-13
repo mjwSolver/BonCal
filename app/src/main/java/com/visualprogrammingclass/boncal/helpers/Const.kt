@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.helper
+package com.visualprogrammingclass.boncal.helpers
 
 object Const {
 
