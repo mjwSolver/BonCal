@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.visualprogrammingclass.boncal.helpers.statics
+import com.visualprogrammingclass.boncal.services.navigations.SetupNavGraph
 import com.visualprogrammingclass.boncal.ui.theme.BonCalTheme
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
@@ -31,18 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = UseColor(Slate900, Slate50)
                 ) {
-
-                    Column(
-                        modifier = Modifier.padding(16.dp)
-                    ) {
-                        androidx.compose.material.Text("Hello Android")
-                        Button(onClick = {
-                            statics.logged = false
-                        }){
-                            Text(text = "Log Out")
-                        }
-                    }
-
+                    Text(text = "Welcome to the HomeScreen")
                 }
             }
         }

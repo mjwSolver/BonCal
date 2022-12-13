@@ -42,11 +42,11 @@ fun  RegisterScreen(theContext: Context) {
 
     Column(modifier = Modifier.padding(16.dp)) {
 
-        if(statics.logged){
-            Intent(theContext, RegisterActivity::class.java).let {
-                theContext.startActivity(it)
-            }
-        }
+//        if(statics.logged){
+//            Intent(theContext, RegisterActivity::class.java).let {
+//                theContext.startActivity(it)
+//            }
+//        }
 
         statics.token = theToken.value
 

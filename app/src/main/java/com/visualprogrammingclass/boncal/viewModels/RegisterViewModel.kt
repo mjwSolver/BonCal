@@ -12,6 +12,7 @@ import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.RegisterRepository
 import com.visualprogrammingclass.boncal.services.dataStores.UserDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,8 +21,10 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
     :ViewModel() {
 
 //    private val userDataStore = UserDataStore(context)
-//
 //    val readFromUserDataStore = userDataStore.user.getValue
+
+//    private val theDataStore = DataStoreRepository(Application())
+//    val info = theDataStore.readFromDataStore
 
     private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val token: LiveData<String> get() = _token
@@ -39,8 +42,6 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
     // =====================================================
 
     fun loginThisUser(theContext: Context, loginDetail: LoginDetail) = viewModelScope.launch {
-
-
 
         repository.loginUser(loginDetail).let { response ->
             if (response.isSuccessful) {

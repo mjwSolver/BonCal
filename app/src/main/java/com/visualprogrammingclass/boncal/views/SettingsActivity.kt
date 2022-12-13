@@ -4,21 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.visualprogrammingclass.boncal.services.navigations.SetupNavGraph
-import com.visualprogrammingclass.boncal.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.views.ui.theme.BonCalTheme
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class RegisterActivity : ComponentActivity() {
+class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,21 +20,24 @@ class RegisterActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = UseColor(dark = Slate900, light = Slate50)
+                    color = MaterialTheme.colors.background
                 ) {
-
-                    SetupNavGraph(navController = rememberNavController())
-                    RegisterScreen(theContext = this)
+                    Greeting2("Android")
                 }
             }
         }
     }
 }
 
+@Composable
+fun Greeting2(name: String) {
+    Text(text = "Hello $name!")
+}
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun DefaultPreview3() {
     BonCalTheme {
-        RegisterScreen(theContext = LocalContext.current)
+        Greeting2("Android")
     }
 }

@@ -13,7 +13,7 @@ class DataStoreRepository(context: Context) {
     private val dataStore: DataStore<Preferences> = context.createDataStore("Settings")
 
     private object PreferencesKey {
-        val name = preferencesKey<String>("string-settings")
+        val name = preferencesKey<String>("settings")
     }
     suspend fun saveToDataStore(value: String){
         dataStore.edit{ settings ->

@@ -18,6 +18,7 @@ import androidx.navigation.NavHostController
 import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.R.drawable.boncallogolight
 import com.visualprogrammingclass.boncal.R.drawable.boncallogodark
+import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.ui.theme.Slate900
 import kotlinx.coroutines.delay
@@ -33,7 +34,7 @@ fun AnimatedSplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(5000)
         navController.popBackStack()
-        navController.navigate("home_screen")
+        navController.navigate(Screen.Home.route)
     }
     Splash(alpha = alphaAnim.value)
 }
