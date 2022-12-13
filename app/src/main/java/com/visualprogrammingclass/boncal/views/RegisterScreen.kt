@@ -2,6 +2,7 @@ package com.visualprogrammingclass.boncal.views
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -61,6 +62,27 @@ fun  RegisterScreen(theContext: Context) {
             text = "The user ${theName.value}",
             color = UseColor(dark = Slate50, light = Slate900)
         )
+
+        Button(onClick = {
+            theContext.openFileOutput("login.txt", Context.MODE_PRIVATE).use {
+                it.write("Hello world login".toByteArray())
+                it.close()
+            }
+        }) {
+            Text(text = "Write login.txt")
+        }
+
+        Button(onClick = {
+            var text: String = ""
+            theContext.openFileInput("login.txt").bufferedReader().useLines { lines ->
+                text = lines.fold("") { some, text ->
+                    "$some\n$text"
+                }
+            }
+            Toast.makeText(theContext, text, Toast.LENGTH_SHORT).show()
+        }) {
+            Text(text = "Read login.txt")
+        }
 
         Button(onClick = {
             val loginDetails = LoginDetail("rama@rama-adi.dev", "password", true)

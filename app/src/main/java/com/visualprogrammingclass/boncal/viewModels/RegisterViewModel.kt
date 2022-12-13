@@ -1,22 +1,27 @@
 package com.visualprogrammingclass.boncal.viewModels
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.visualprogrammingclass.boncal.models.LoginDetail
+import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.RegisterRepository
+import com.visualprogrammingclass.boncal.services.dataStores.UserDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val repository: RegisterRepository) :
-    ViewModel() {
+class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
+    :ViewModel() {
+
+//    private val userDataStore = UserDataStore(context)
+//
+//    val readFromUserDataStore = userDataStore.user.getValue
 
     private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val token: LiveData<String> get() = _token
@@ -34,6 +39,9 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
     // =====================================================
 
     fun loginThisUser(theContext: Context, loginDetail: LoginDetail) = viewModelScope.launch {
+
+
+
         repository.loginUser(loginDetail).let { response ->
             if (response.isSuccessful) {
 
@@ -47,6 +55,8 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
             }
         }
     }
+
+
 
 //    fun
 

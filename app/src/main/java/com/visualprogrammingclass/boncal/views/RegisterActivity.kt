@@ -27,7 +27,7 @@ class RegisterActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = UseColor(dark = Slate900, light = Slate50)
                 ) {
-                    SetupNavGraph(navController = NavHostController(this))
+//                    SetupNavGraph(navController = NavHostController(this))
                     
                     RegisterScreen(theContext = this)
                 }

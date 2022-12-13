@@ -1,16 +1,24 @@
 package com.visualprogrammingclass.boncal.services.dataStores
 
 import android.content.Context
-import android.preference.PreferenceDataStore
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.preferencesOf
-import androidx.datastore.preferences.core.stringPreferencesKey
-import java.util.prefs.Preferences
-import androidx.compose.runtime.getValue
-import javax.sql.DataSource
+import android.util.Log
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import java.io.IOException
 
-class UserDataStore(private val context: Context) {
-    private val datastore: DataSource<Preferences> = context.createDataStore(
-       name = "lol"
-   )
+class UserDataStore(context: Context) {
+    private val dataStore: DataStore<Preferences> = context.createDataStore(name = "userStorage")
+
+    val user: KeyValueDatastore<String> = KeyValueDatastore(
+        keyName = "user",
+        dataStore = dataStore
+    )
+
+    val token: KeyValueDatastore<String> = KeyValueDatastore(
+        keyName = "token",
+        dataStore = dataStore
+    )
 }
