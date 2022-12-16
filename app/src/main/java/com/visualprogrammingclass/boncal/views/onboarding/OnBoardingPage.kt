@@ -1,32 +1,42 @@
 package com.visualprogrammingclass.boncal.views.onboarding
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import com.visualprogrammingclass.boncal.R
 
 sealed class OnBoardingPage(
-    @DrawableRes
     val image: Int,
     val title: String,
     val description: String
-)
+) {
     object First : OnBoardingPage(
-        image = TODO(),
+        image = R.drawable.count,
 //        image = R.drawable.first,
-        title = "Meeting",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        title = "Count",
+        description = "Count your Carbon Emission Easily."
     )
 
     object Second : OnBoardingPage(
-        image = TODO(),
+        image = R.drawable.resources,
 //        image = R.drawable.second,
-        title = "Coordination",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        title = "Learn",
+        description = "Find Resources to reduce your carbon emission."
     )
 
     object Third : OnBoardingPage(
-        image = TODO(),
+        image = R.drawable.save,
 //        image = R.drawable.third,
-        title = "Dialogue",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        title = "Better Earth",
+        description = "Low Carbon Footprint \n =\n Better Earth"
     )
 }

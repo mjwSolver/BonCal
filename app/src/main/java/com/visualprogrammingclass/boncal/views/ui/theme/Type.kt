@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.views.theme
+package com.visualprogrammingclass.boncal.views.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Typography

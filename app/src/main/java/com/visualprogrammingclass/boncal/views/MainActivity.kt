@@ -19,9 +19,9 @@ import androidx.navigation.NavHostController
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.repositories.SplashViewModel
 import com.visualprogrammingclass.boncal.services.navigations.SetupNavGraph
-import com.visualprogrammingclass.boncal.views.theme.BonCalTheme
-import com.visualprogrammingclass.boncal.views.theme.Slate50
-import com.visualprogrammingclass.boncal.views.theme.Slate900
+import com.visualprogrammingclass.boncal.views.ui.theme.BonCalTheme
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

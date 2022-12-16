@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.views.theme.Slate50
-import com.visualprogrammingclass.boncal.views.theme.Slate900
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
 
 @Composable

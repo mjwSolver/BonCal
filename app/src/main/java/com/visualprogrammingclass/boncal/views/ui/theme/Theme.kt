@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.views.theme
+package com.visualprogrammingclass.boncal.views.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,6 +14,22 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
+
+private val TheDarkColorScheme = darkColorScheme(
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80
+)
+
+private val TheLightColorScheme = lightColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40
+)
+
+// ================
+// Default
+// ================
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,

@@ -18,8 +18,8 @@ import androidx.navigation.NavHostController
 import com.visualprogrammingclass.boncal.R.drawable.boncallogolight
 import com.visualprogrammingclass.boncal.R.drawable.boncallogodark
 import com.visualprogrammingclass.boncal.services.navigations.Screen
-import com.visualprogrammingclass.boncal.views.theme.Slate50
-import com.visualprogrammingclass.boncal.views.theme.Slate900
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
 import kotlinx.coroutines.delay
 
 @Composable
