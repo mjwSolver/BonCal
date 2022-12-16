@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.ui.theme.Slate900
+import com.visualprogrammingclass.boncal.views.theme.Slate50
+import com.visualprogrammingclass.boncal.views.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
 
 @Composable
@@ -41,12 +41,6 @@ fun  RegisterScreen(theContext: Context) {
     val theName: State<String> = registViewModel.name.observeAsState("")
 
     Column(modifier = Modifier.padding(16.dp)) {
-
-//        if(statics.logged){
-//            Intent(theContext, RegisterActivity::class.java).let {
-//                theContext.startActivity(it)
-//            }
-//        }
 
         statics.token = theToken.value
 
@@ -111,9 +105,9 @@ fun  RegisterScreen(theContext: Context) {
             val loginDetails = LoginDetail(email, password, false)
             statics.logged = true
             registViewModel.loginThisUser(theContext, loginDetails).invokeOnCompletion {
-                Intent(theContext, RegisterActivity::class.java).let {
-                    theContext.startActivity(it)
-                }
+//                Intent(theContext, RegisterActivity::class.java).let {
+//                    theContext.startActivity(it)
+//                }
             }
 
         }) {Text(text = "Login!!!")}

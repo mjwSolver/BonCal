@@ -65,23 +65,33 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
+    // Base Retrofit & Hilt Dependency
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
     kapt 'com.google.dagger:hilt-compiler:2.44'
     implementation 'com.google.dagger:hilt-android:2.44'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0' // from OnBoarding
 
     // Navigation Dependency
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
+    //Font Dependency
     implementation "androidx.compose.ui:ui-text-google-fonts:1.3.2"
 
+    // LiveData - compose Dependency
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 
-//    implementation 'androidx.datastore:datastore-core-android:+'
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+    // DataStore
+//    implementation "androidx.datastore:datastore-preferences:1.0.0"
 //    implementation "androidx.datastore:datastore-preferences-core:1.0.0"
-    // Where did the above came from?
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Onboarding Dependency
+    implementation "androidx.core:core-splashscreen:1.0.0"
+    implementation "androidx.compose:navigation-compose:2.5.0-alpha02"
+    implementation "com.google.accompanist:accompanist-pager:0.28.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.28.0"
+        // DataStore
 
 
 }

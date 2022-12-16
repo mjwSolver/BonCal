@@ -15,12 +15,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.R.drawable.boncallogolight
 import com.visualprogrammingclass.boncal.R.drawable.boncallogodark
 import com.visualprogrammingclass.boncal.services.navigations.Screen
-import com.visualprogrammingclass.boncal.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.ui.theme.Slate900
+import com.visualprogrammingclass.boncal.views.theme.Slate50
+import com.visualprogrammingclass.boncal.views.theme.Slate900
 import kotlinx.coroutines.delay
 
 @Composable

@@ -1,4 +1,4 @@
-package com.visualprogrammingclass.boncal.ui.theme
+package com.visualprogrammingclass.boncal.views.theme
 
 import androidx.compose.ui.graphics.Color
 
