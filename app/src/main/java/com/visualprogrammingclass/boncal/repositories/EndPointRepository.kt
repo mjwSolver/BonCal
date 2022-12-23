@@ -1,12 +1,23 @@
 package com.visualprogrammingclass.boncal.repositories
 
 import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.models.userdata
 import com.visualprogrammingclass.boncal.services.retrofit.EndPointAPI
 import javax.inject.Inject
 
 
-class RegisterRepository @Inject constructor(private val api: EndPointAPI) {
+class EndPointRepository @Inject constructor(private val api: EndPointAPI) {
+
+    // ===============
+    // Remember Me
+    // ===============
+
+    suspend fun saveOnRememberMeState(rememberMe: Boolean){
+
+    }
+
+    // ===============
+    // Retrofit
+    // ===============
 
     // Register / Sign up = New User
 //    suspend fun registerUser(userData: userdata) = api.createNewUser(userData)

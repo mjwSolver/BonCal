@@ -16,7 +16,7 @@ val DarkTeal = Color(0xFF115E59) // Teal800
 // Logo / Primary Colors
 val Blue400 = Color(0xFF60A5FA)
 val Emerald400 = Color(0xFF34D399)
-
+ 
 // Secondary Color
 val Sky500 = Color(0xFF0EA5E9) // Sky500
 val Teal500 = Color(0xFF14B8A6) // Teal500

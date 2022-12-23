@@ -16,6 +16,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.services.navigations.Screen
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
+import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -23,14 +25,20 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier.padding(16.dp)
     ) {
         Text("Hello Android")
-        Button(onClick = {
-            statics.logged = false
-        }){
-            Text(text = "Log Out - Don't press")
-        }
-        Button(onClick = { navController.navigate(Screen.Register.route)}) {
-            Text("Register route")
-        }
+
+        Text(text = "Welcome to the HomeScreen",
+            color = UseColor(dark = Slate50, light = Slate900))
+
     }
 }
 
+
+
+//        Button(onClick = {
+//            statics.logged = false
+//        }){
+//            Text(text = "Log Out - Don't press")
+//        }
+//        Button(onClick = { navController.navigate(Screen.Register.route)}) {
+//            Text("Register route")
+//        }

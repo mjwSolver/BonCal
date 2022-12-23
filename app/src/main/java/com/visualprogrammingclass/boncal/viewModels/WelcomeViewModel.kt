@@ -12,7 +12,6 @@ import javax.inject.Inject
 class WelcomeViewModel @Inject constructor(private val repository:DataStoreRepository): ViewModel() {
 
     // Using Data Store - or store the file separately again
-
     fun saveOnBoardingState(completed: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.saveOnBoardingState(completed = completed)

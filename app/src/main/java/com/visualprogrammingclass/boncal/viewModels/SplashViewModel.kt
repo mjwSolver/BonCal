@@ -1,16 +1,16 @@
-package com.visualprogrammingclass.boncal.repositories
+package com.visualprogrammingclass.boncal.viewModels
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class SplashViewModel @Inject constructor(repository: DataStoreRepository): ViewModel() {
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)

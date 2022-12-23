@@ -40,6 +40,46 @@ fun  RegisterScreen(theContext: Context) {
     val theToken: State<String> = registViewModel.token.observeAsState("")
     val theName: State<String> = registViewModel.name.observeAsState("")
 
+}
+
+//private lateinit var dataStore: DataStore<Preferences>
+
+//private suspend fun save(context: Context, key:String, value: String){
+//    val dataStoreKey = stringPreferencesKey(key)
+//    dataStore. { settings -> settings[dataStoreKey]= value}
+//}
+
+//private suspend fun read(key:String): String? {
+//    val dataStoreKey = stringPreferencesKey(key)
+//    val preferences = dataStore.data.first()
+//    return preferences[dataStoreKey]
+//}
+
+@Composable
+fun CustomTextInputLayout(
+    label:String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    leadIcon: ImageVector = Icons.Default.Email,
+//    trailIcon: ImageVector = Icons.
+    onValueChanged: (String) -> Unit
+){
+    val (text, setText) = remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = text, onValueChange = setText,
+        leadingIcon = { Icon(imageVector = leadIcon, contentDescription = "")
+//        trailingIcon = { Icon(imageVector = )}
+        }
+    )
+}
+
+@Composable
+fun AgedRegisterScreen(theContext: Context){
+    val registViewModel: RegisterViewModel = viewModel()
+    val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
+    val theToken: State<String> = registViewModel.token.observeAsState("")
+    val theName: State<String> = registViewModel.name.observeAsState("")
+
     Column(modifier = Modifier.padding(16.dp)) {
 
         statics.token = theToken.value
@@ -98,7 +138,7 @@ fun  RegisterScreen(theContext: Context) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             onValueChanged = setPassword
         )
-        
+
 //        Checkbox(checked = true, onCheckedChange = )
 
         Button(onClick = {
@@ -112,37 +152,6 @@ fun  RegisterScreen(theContext: Context) {
 
         }) {Text(text = "Login!!!")}
     }
-}
-
-//private lateinit var dataStore: DataStore<Preferences>
-
-//private suspend fun save(context: Context, key:String, value: String){
-//    val dataStoreKey = stringPreferencesKey(key)
-//    dataStore. { settings -> settings[dataStoreKey]= value}
-//}
-
-//private suspend fun read(key:String): String? {
-//    val dataStoreKey = stringPreferencesKey(key)
-//    val preferences = dataStore.data.first()
-//    return preferences[dataStoreKey]
-//}
-
-@Composable
-fun CustomTextInputLayout(
-    label:String,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    leadIcon: ImageVector = Icons.Default.Email,
-//    trailIcon: ImageVector = Icons.
-    onValueChanged: (String) -> Unit
-){
-    val (text, setText) = remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = text, onValueChange = setText,
-        leadingIcon = { Icon(imageVector = leadIcon, contentDescription = "")
-//        trailingIcon = { Icon(imageVector = )}
-        }
-    )
 }
 
 @Composable

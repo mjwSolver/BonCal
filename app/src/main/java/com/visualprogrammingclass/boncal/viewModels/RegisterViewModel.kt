@@ -1,23 +1,17 @@
 package com.visualprogrammingclass.boncal.viewModels
 
-import android.app.Application
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.*
 import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
-import com.visualprogrammingclass.boncal.repositories.RegisterRepository
-import com.visualprogrammingclass.boncal.services.dataStores.UserDataStore
+import com.visualprogrammingclass.boncal.repositories.EndPointRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val repository: RegisterRepository)
+class RegisterViewModel @Inject constructor(private val repository: EndPointRepository)
     :ViewModel() {
 
 //    private val userDataStore = UserDataStore(context)
@@ -25,6 +19,12 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
 
 //    private val theDataStore = DataStoreRepository(Application())
 //    val info = theDataStore.readFromDataStore
+
+    fun saveOnRememberMeState(rememberMe: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.saveOnRememberMeState(rememberMe = rememberMe)
+        }
+    }
 
     private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val token: LiveData<String> get() = _token

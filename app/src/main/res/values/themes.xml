@@ -2,4 +2,14 @@
 <resources>
 
     <style name="Theme.BonCal" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/boncallogoblack</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.BonCal</item>
+    </style>
+
+<!--    Make a dark and light theme difference for the splashscreen icon -->
+
 </resources>
