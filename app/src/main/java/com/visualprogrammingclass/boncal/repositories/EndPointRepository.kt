@@ -14,8 +14,10 @@ class EndPointRepository @Inject constructor(private val api: EndPointAPI) {
     // Login-in
     suspend fun loginUser(loginDetail: LoginDetail) = api.loginUser(loginDetail)
 
-    // Log-out
-    suspend fun getUserData(token:String) = api.getUserData(token)
+    // Get user data after login in or register
+    suspend fun getUserData(token:String) = api.getUserData(token = "Bearer $token")
 
+    // Getting WidgetData
+    suspend fun getWidgetData(token:String) = api.getWidgetData(token = "Bearer $token")
 
 }
