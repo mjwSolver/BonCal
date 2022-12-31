@@ -1,27 +1,25 @@
 package com.visualprogrammingclass.boncal.viewModels
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.lifecycle.*
-import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.models.RegisterDetail
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
+import com.visualprogrammingclass.boncal.models.authentication.RegisterDetail
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
-import com.visualprogrammingclass.boncal.repositories.RegisterRepository
-import com.visualprogrammingclass.boncal.services.dataStores.UserDataStore
+import com.visualprogrammingclass.boncal.repositories.EndPointRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-            private val repository: RegisterRepository
-        )
+    private val repository: EndPointRepository,
+    dataStoreRepository: DataStoreRepository
+)
     :ViewModel() {
 
 //    private val userDataStore = UserDataStore(context)
@@ -51,9 +49,6 @@ class RegisterViewModel @Inject constructor(
 
                 response.body()?.let {
                     Toast.makeText(theContext, it.message, Toast.LENGTH_SHORT).show()
-                    _tokenName.postValue(it.data.token_name)
-                    _token.postValue(it.data.token)
-                    _name.postValue(it.data.user.name)
                 }
 
             } else {

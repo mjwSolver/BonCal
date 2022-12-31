@@ -54,17 +54,12 @@ fun BoncalTextInputLayout(
     setText: (String) -> Unit,
     onClick: () -> Unit
 ){
-//    val (thisText,setThisText) = remember { mutableStateOf(text) }
-//    var thisText by remember { mutableStateOf(text) }
 
     OutlinedTextField(
         modifier = Modifier.padding(5.dp).focusable(),
         shape = RoundedCornerShape(24.dp),
 
         value = text, onValueChange = setText,
-//        value = thisText, onValueChange = {theText -> thisText = theText},
-//        value = thisText.value, onValueChange = {theText -> thisText = theText},
-//        value = thisText.value, onValueChange = { setThisText(thisText) },
 
         label = { Text(text = label) },
         placeholder = { Text(text = label)},
@@ -106,7 +101,8 @@ fun BoncalTextInputLayout(
 @Composable
 fun BoncalPasswordTextInputLayout(
     password: String,
-    setPassword: (String) -> Unit
+    setPassword: (String) -> Unit,
+    focusManager: FocusManager
 ){
 
     var passwordVisibility by rememberSaveable { mutableStateOf(false) }
@@ -181,13 +177,12 @@ fun previewJustTheTextInput() {
 fun previewThePasswordInput() {
     BonCalTheme() {
         Surface() {
-//            var dummyText by remember { mutableStateOf("") }
+            val theFocusManager = LocalFocusManager.current
             val (dummyText,setDummyText) = remember { mutableStateOf("") }
-//            BoncalPasswordTextInputLayout(password = dummyText, setPassword = {newPass -> dummyText = newPass})
             BoncalPasswordTextInputLayout(
                 password = dummyText,
-//                setPassword = { newPass -> dummyText = newPass }
-                setPassword = setDummyText
+                setPassword = setDummyText,
+                focusManager = theFocusManager
             )
 
         }
