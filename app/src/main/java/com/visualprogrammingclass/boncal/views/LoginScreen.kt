@@ -79,7 +79,8 @@ fun LoginScreen(
             val (password, setPassword) = rememberSaveable{ mutableStateOf("") }
             BoncalPasswordTextInputLayout(
                 password = password,
-                setPassword = setPassword
+                setPassword = setPassword,
+                focusManager = theFocusManager
             )
 
             // Not yet configured
@@ -110,16 +111,16 @@ fun LoginScreen(
                         Log.d("login_password", password)
 
                         // Need authentication...
-                        val authenticationSucceeded = theSuccess.value
-                        if(authenticationSucceeded){
+//                        val authenticationSucceeded = theSuccess.value
+//                        if(authenticationSucceeded){
                             navController.popBackStack()
                             navController.navigate(Screen.Home.route)
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Something wrong happened",
-                                Toast.LENGTH_SHORT).show()
-                        }
+//                        } else {
+//                            Toast.makeText(
+//                                context,
+//                                "Something wrong happened",
+//                                Toast.LENGTH_SHORT).show()
+//                        }
                     })
 
         }

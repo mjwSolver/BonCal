@@ -4,16 +4,21 @@ import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.services.navigations.Screen
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SplashViewModel @Inject constructor(repository: DataStoreRepository): ViewModel() {
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
@@ -22,15 +27,14 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
     private val _startDestination: MutableState<String> = mutableStateOf(Screen.Welcome.route)
     val startDestination: State<String> = _startDestination
 
+    val _theOnBoard: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+//    val theOnBoard: LiveData<Boolean> get() = _theOnBoard
+
+    val _theRemembered: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+//    val theRemembered: LiveData<Boolean> get() = _theRemembered
+
     init {
-
-        val onBoardingScope = viewModelScope.async {
-            return@async repository.readOnBoardingState().collect()
-        }
-        onBoardingScope.invokeOnCompletion {
-            Log.d("onBoardingScope", "$onBoardingScope")
-        }
-
+        // Not working
         viewModelScope.launch {
 
             var onBoard = false;
@@ -70,5 +74,6 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
 
             _isLoading.value = false
         }
+
     }
 }

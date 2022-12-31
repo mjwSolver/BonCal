@@ -36,9 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.visualprogrammingclass.boncal.R.drawable.ic_baseline_visibility_24
 import com.visualprogrammingclass.boncal.R.drawable.ic_baseline_visibility_off_24
-import com.visualprogrammingclass.boncal.views.ui.theme.BonCalTheme
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
+import com.visualprogrammingclass.boncal.views.UseColor
+import com.visualprogrammingclass.boncal.views.ui.theme.*
 
 @Composable
 // Not done
@@ -56,22 +55,28 @@ fun BoncalTextInputLayout(
 ){
 
     OutlinedTextField(
-        modifier = Modifier.padding(5.dp).focusable(),
+        modifier = Modifier
+            .padding(5.dp)
+            .focusable(),
         shape = RoundedCornerShape(24.dp),
 
         value = text, onValueChange = setText,
 
-        label = { Text(text = label) },
+        label = { Text(
+            text = label,
+            color = foregroundColor()
+        )},
         placeholder = { Text(text = label)},
 
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor =
-            if(isSystemInDarkTheme()) Slate50 else Slate900),
+            focusedBorderColor = foregroundColor(),
+            backgroundColor = backgroundColor()
+        ),
 
         leadingIcon = { Icon(
             imageVector = leadIcon,
             contentDescription = "leadIcon",
-            tint = Slate900,
+            tint = foregroundColor(),
             modifier = Modifier.offset(x = 5.dp),
         ) },
         trailingIcon = {
@@ -79,20 +84,22 @@ fun BoncalTextInputLayout(
                 Icon(
                     imageVector = trailingIcon,
                     contentDescription = "trailIcon",
-                    tint = Slate900,
+                    tint = foregroundColor(),
                     modifier = Modifier.offset(x = (-5).dp))
             }
        },
         
         visualTransformation = visualTransformation,
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Next,
         ),
         keyboardActions = KeyboardActions(
             onNext = {focusManager.moveFocus(FocusDirection.Down)}
         ),
 
         maxLines = 1,
+        singleLine = true,
 
     )
 }
@@ -114,12 +121,15 @@ fun BoncalPasswordTextInputLayout(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     OutlinedTextField(
-        modifier = Modifier.padding(5.dp).focusable(),
+        modifier = Modifier
+            .padding(5.dp)
+            .focusable(),
         shape = RoundedCornerShape(24.dp),
 
         value = password, onValueChange = setPassword,
 
-        placeholder = { Text(text = label) }, label = { Text(text = label) },
+        placeholder = { Text(text = label) },
+        label = { Text( text = label,color = foregroundColor()) },
 
         visualTransformation = if(passwordVisibility) VisualTransformation.None
             else PasswordVisualTransformation(),
@@ -132,22 +142,23 @@ fun BoncalPasswordTextInputLayout(
         ),
 
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor =
-            if(isSystemInDarkTheme()) Slate50 else Slate900),
+            focusedBorderColor = foregroundColor(),
+            backgroundColor = backgroundColor(),
+        ),
 
         leadingIcon = {
             Icon(
                 imageVector = Icons.Filled.Lock,
                 contentDescription = "lock",
                 modifier = Modifier.offset(x = 5.dp),
-                tint = Slate900)
+                tint = foregroundColor())
         },
         trailingIcon = {
             IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                 Icon(
                     painter = trailIcon,
                     contentDescription = "trailIcon",
-                    tint = Slate900,
+                    tint = foregroundColor(),
                     modifier = Modifier.offset(x = (-5).dp))
 
             }

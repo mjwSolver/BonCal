@@ -1,5 +1,7 @@
 package com.visualprogrammingclass.boncal.views.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
@@ -27,3 +29,9 @@ val Slate50 = Color(0xFFF8FAFC)
 val Slate900 = Color(0xFF0F172A)
 
 val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400))
+
+@Composable
+fun backgroundColor() = if(isSystemInDarkTheme()) Slate900 else Slate50
+
+@Composable
+fun foregroundColor() = if(isSystemInDarkTheme()) Slate50 else Slate900

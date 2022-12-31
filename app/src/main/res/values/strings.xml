@@ -2,4 +2,16 @@
     <string name="app_name">BonCal</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+
+
+    <string name="image_url">
+        "https://en.wikipedia.org/wiki/Cat#/media/File:Cat_August_2010-4.jpg"
+    </string>
+    <string name="stev">
+        "https://avatars.githubusercontent.com/u/14994036?v=4"
+    </string>
+    <string name="widget">
+        https://boncal-widget-image.vercel.app/api/widgets-delivery/aqi?city=Madura&amp;aqi=50
+    </string>
+
 </resources>
