@@ -2,6 +2,7 @@ package com.visualprogrammingclass.boncal.views
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Outline
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -28,53 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.models.LoginDetail
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
+import com.visualprogrammingclass.boncal.views.theme.Slate50
+import com.visualprogrammingclass.boncal.views.theme.Slate900
 import com.visualprogrammingclass.boncal.viewModels.RegisterViewModel
 
 @Composable
 fun  RegisterScreen(theContext: Context) {
 
-    val registViewModel: RegisterViewModel = viewModel()
-    val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
-    val theToken: State<String> = registViewModel.token.observeAsState("")
-    val theName: State<String> = registViewModel.name.observeAsState("")
-
-}
-
-//private lateinit var dataStore: DataStore<Preferences>
-
-//private suspend fun save(context: Context, key:String, value: String){
-//    val dataStoreKey = stringPreferencesKey(key)
-//    dataStore. { settings -> settings[dataStoreKey]= value}
-//}
-
-//private suspend fun read(key:String): String? {
-//    val dataStoreKey = stringPreferencesKey(key)
-//    val preferences = dataStore.data.first()
-//    return preferences[dataStoreKey]
-//}
-
-@Composable
-fun CustomTextInputLayout(
-    label:String,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    leadIcon: ImageVector = Icons.Default.Email,
-//    trailIcon: ImageVector = Icons.
-    onValueChanged: (String) -> Unit
-){
-    val (text, setText) = remember { mutableStateOf("") }
-    OutlinedTextField(
-        value = text, onValueChange = setText,
-        leadingIcon = { Icon(imageVector = leadIcon, contentDescription = "")
-//        trailingIcon = { Icon(imageVector = )}
-        }
-    )
-}
-
-@Composable
-fun AgedRegisterScreen(theContext: Context){
     val registViewModel: RegisterViewModel = viewModel()
     val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
     val theToken: State<String> = registViewModel.token.observeAsState("")
@@ -152,6 +113,25 @@ fun AgedRegisterScreen(theContext: Context){
 
         }) {Text(text = "Login!!!")}
     }
+}
+
+@Composable
+fun CustomTextInputLayout(
+    label:String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    leadIcon: ImageVector = Icons.Default.Email,
+//    trailIcon: ImageVector = Icons.
+    onValueChanged: (String) -> Unit
+){
+    val (text, setText) = remember { mutableStateOf("") }
+    OutlinedTextField(
+        value = text, onValueChange = setText,
+        leadingIcon = { Icon(imageVector = leadIcon, contentDescription = "leadIcon") },
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+//        trailingIcon = { Icon(imageVector = )}
+    )
 }
 
 @Composable

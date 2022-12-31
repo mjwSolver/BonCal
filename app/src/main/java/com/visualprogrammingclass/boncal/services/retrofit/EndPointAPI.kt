@@ -1,55 +1,49 @@
 package com.visualprogrammingclass.boncal.services.retrofit
 
 import com.visualprogrammingclass.boncal.models.*
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
+import com.visualprogrammingclass.boncal.models.authentication.*
 import retrofit2.Response
 import retrofit2.http.*
 
+// ============
+// template Heading
+// ============
+
 interface EndPointAPI {
 
-//    @POST("/auth/register")
-//    suspend fun createNewUser(
-//        @Body registerRequest: RequestBody
-//    ): Response<ApiResponse<>>
+    // ============
+    // Authentication and Administration
+    // ============
 
-//    @GET("/users/{email}")
-////    suspend fun getOneUser(
-////        @Query("email") email: String
-////    ): Response<ApiResponse<>>
+    @POST("/auth/register")
+    suspend fun registerUser(
+        @Body registerResponse: RegisterDetail
+    ): Response<ApiResponse<RegisterResponse>>
 
     @POST("/auth/login")
     suspend fun loginUser(
         @Body loginDetails: LoginDetail
     ):Response<ApiResponse<LoginResponse>>
 
-//    @GET("/auth/user")
-//    @GET("/auth/user/logout")
+    @GET("/auth/user")
+    suspend fun getUserData(
+        @Header("Authorization") token:String
+    ): Response<ApiResponse<User>>
+
+    // ============
+    // ...
+    // ============
 
     @GET("/api/emission/list-categories")
     suspend fun getListOfCategories(
-        @Header("Authorization") auth:String
+        @Header("Authorization") token:String
     ): Response<ApiResponse<DataListEmissionCategory>>
 
     @POST("/api/emission/log-emission")
     suspend fun logEmission(
         @Body EmissionBody:String,
-        @Header("Authorization") auth:String
+        @Header("Authorization") token:String
     ): Response<ApiResponse<DataDetailedEmissionLogResponse>>
 
-
-
-//    @GET("movie/now_playing")
-//    suspend fun getNowPlaying(
-//        @Query("api_key") apiKey:String,
-//        @Query("language") language:String,
-//        @Query("page") page:Int
-//    ): Response<NowPlaying>
-
-//    @GET("movie/{movie_id}")
-//    suspend fun getMovieDetails(
-//        @Path("movie_id") Id:Int,
-//        @Query("api_key") apiKey:String
-//    ):Response<MovieDetails>
 
 }

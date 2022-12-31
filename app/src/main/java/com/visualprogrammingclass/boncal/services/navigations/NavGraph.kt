@@ -9,9 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.visualprogrammingclass.boncal.Application
-import com.visualprogrammingclass.boncal.views.AnimatedSplashScreen
-import com.visualprogrammingclass.boncal.views.HomeScreen
-import com.visualprogrammingclass.boncal.views.MainActivity
+import com.visualprogrammingclass.boncal.views.*
 import com.visualprogrammingclass.boncal.views.onboarding.WelcomeScreen
 
 @ExperimentalAnimationApi
@@ -30,6 +28,14 @@ fun SetupNavGraph(navController: NavHostController, startDestination: String) {
 //        }
         composable(route = Screen.Home.route){
             HomeScreen(navController = navController)
+        }
+
+        composable(route = Screen.Login.route){
+            LoginScreen(navController = navController)
+        }
+
+        composable(route = Screen.Register.route){
+            RegisterScreen(navController = navController)
         }
 
     }

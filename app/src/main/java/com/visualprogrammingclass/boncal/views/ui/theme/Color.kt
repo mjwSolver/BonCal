@@ -1,5 +1,6 @@
 package com.visualprogrammingclass.boncal.views.ui.theme
 
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -24,3 +25,5 @@ val Teal500 = Color(0xFF14B8A6) // Teal500
 // Basic Light and Dark
 val Slate50 = Color(0xFFF8FAFC)
 val Slate900 = Color(0xFF0F172A)
+
+val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400))

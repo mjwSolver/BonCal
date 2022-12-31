@@ -4,11 +4,14 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,19 +21,20 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.pager.*
+import com.visualprogrammingclass.boncal.components.BoncalGradientButton
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.viewModels.WelcomeViewModel
+import com.visualprogrammingclass.boncal.views.ui.theme.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
-fun WelcomeScreen(navController: NavHostController, welcomeViewModel: WelcomeViewModel = hiltViewModel()) {
-    val pages = listOf(
-        OnBoardingPage.First,
-        OnBoardingPage.Second,
-        OnBoardingPage.Third
-    )
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()) {
+
     val pagerState = rememberPagerState()
+    val theColor = if(isSystemInDarkTheme()) Slate50 else Slate900
 
     Column(modifier = Modifier.fillMaxSize()) {
         HorizontalPager(
@@ -39,12 +43,13 @@ fun WelcomeScreen(navController: NavHostController, welcomeViewModel: WelcomeVie
             state = pagerState,
             verticalAlignment = Alignment.Top
         ) { position ->
-            PagerScreen(onBoardingPage = pages[position])
+            PagerScreen(onBoardingPage = welcomeViewModel.pages[position])
         }
         HorizontalPagerIndicator(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .weight(1f),
+            activeColor = theColor,
             pagerState = pagerState
         )
         FinishButton(
@@ -53,13 +58,16 @@ fun WelcomeScreen(navController: NavHostController, welcomeViewModel: WelcomeVie
         ) {
             welcomeViewModel.saveOnBoardingState(completed = true)
             navController.popBackStack()
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Screen.Login.route)
         }
     }
 }
 
 @Composable
 fun PagerScreen(onBoardingPage: OnBoardingPage) {
+
+    val textColor = if(isSystemInDarkTheme()) Slate50 else Slate900
+
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -79,7 +87,8 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
             text = onBoardingPage.title,
             fontSize = MaterialTheme.typography.h4.fontSize,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = textColor,
         )
         Text(
             modifier = Modifier
@@ -89,7 +98,8 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
             text = onBoardingPage.description,
             fontSize = MaterialTheme.typography.subtitle1.fontSize,
             fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = textColor,
         )
     }
 }
@@ -102,6 +112,7 @@ fun FinishButton(
     pagerState: PagerState,
     onClick: () -> Unit
 ) {
+
     Row(
         modifier = modifier
             .padding(horizontal = 40.dp),
@@ -109,17 +120,46 @@ fun FinishButton(
         horizontalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .padding(2.dp)
+                .fillMaxWidth(),
             visible = pagerState.currentPage == 2
         ) {
+
+//            Button(
+//                onClick = onClick,
+//                colors = ButtonDefaults.buttonColors(
+//                    contentColor = Color.White
+//                )
+//            ) {
+//                Text(text = "Finish")
+//            }
+
             Button(
+                contentPadding = PaddingValues(),
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White
-                )
-            ) {
-                Text(text = "Finish")
+                    contentColor = Slate50,
+                    backgroundColor = Color.Transparent
+                ),
+            ){
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(40.dp)
+                        .background(BoncalGradient),
+                    contentAlignment = Alignment.Center,
+                ){
+                    Text(text = "Finish")
+                }
             }
+
+
+
+//            BoncalGradientButton(
+//                text = "Finish",
+//                onClick = onClick)
+
         }
     }
 }
@@ -145,5 +185,21 @@ fun SecondOnBoardingScreenPreview() {
 fun ThirdOnBoardingScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
         PagerScreen(onBoardingPage = OnBoardingPage.Third)
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class, ExperimentalAnimationApi::class)
+@Composable
+@Preview(showBackground = true)
+fun FinishButtonPreview() {
+
+    val pagerState = rememberPagerState(2)
+
+    Column(modifier = Modifier.fillMaxSize()) {
+        FinishButton(
+            modifier = Modifier.weight(1f),
+            pagerState = pagerState
+        ) {
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.visualprogrammingclass.boncal.models
 
+import com.visualprogrammingclass.boncal.models.authentication.User
+
 data class DataDetailedEmissionLogResponse(
     val Amount: Int,
     val CarbonOutput: Double,

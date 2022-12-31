@@ -9,22 +9,30 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
-private val TheDarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+// ================
+// BonCal Scheme
+// ================
+
+private val BoncalDarkColorScheme = darkColorScheme(
+    background = Slate900,
+    primary = Blue400,
+    secondary = Emerald400,
+    tertiary = Sky500,
+
 )
 
-private val TheLightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+private val BoncalLightColorScheme = lightColorScheme(
+    background = Slate50,
+    primary = Blue400,
+    secondary = Emerald400,
+    tertiary = Sky500,
 )
 
 // ================
@@ -32,12 +40,14 @@ private val TheLightColorScheme = lightColorScheme(
 // ================
 
 private val DarkColorScheme = darkColorScheme(
+    background = Slate900,
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
+    background = Slate50,
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40
@@ -71,14 +81,18 @@ fun BonCalTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
+            (view.context as Activity).window.statusBarColor = colorScheme.background.toArgb()
             ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(
+        LocalLogo provides Logo()
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
