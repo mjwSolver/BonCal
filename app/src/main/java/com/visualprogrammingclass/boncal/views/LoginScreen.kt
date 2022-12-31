@@ -90,46 +90,46 @@ fun LoginScreen(
                 BoncalCheckBox(checked, setChecked); Text(text = "Remember Me")
             }
 
-                ClickableText(
-                    text = AnnotatedString("Register a New Account"),
-                    onClick = {
-                        navController.popBackStack()
-                        navController.navigate(Screen.Register.route)
-                    }
-                )
+            ClickableText(
+                text = AnnotatedString("Register a New Account"),
+                onClick = {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Register.route)
+                }
+            )
 
-                BoncalGradientButton(
+            BoncalGradientButton(
 //                    modifier = Modifier
 //                        .fillMaxWidth(),
-                    text = "Login",
-                    onClick = {
+                text = "Login",
+                onClick = {
 
-                        val validationResult = validateEmailAndPassword(email = email, password = password)
-                        if(validationResult.isNotEmpty()){
-                            Toast.makeText(context, "Please fill in $validationResult Field", Toast.LENGTH_SHORT).show()
-                            return@BoncalGradientButton
-                        }
+                    val validationResult = validateEmailAndPassword(email = email, password = password)
+                    if(validationResult.isNotEmpty()){
+                        Toast.makeText(context, "Please fill in $validationResult Field", Toast.LENGTH_SHORT).show()
+                        return@BoncalGradientButton
+                    }
 
-                        loginViewModel.loginThisUser(
-                            context,
-                            LoginDetail(email = email, password = password, remember =  checked)
-                        )
-                        Log.d("login_button", "button pressed")
-                        Log.d("login_email", email)
-                        Log.d("login_password", password)
+                    loginViewModel.loginThisUser(
+                        context,
+                        LoginDetail(email = email, password = password, remember =  checked)
+                    )
+                    Log.d("login_button", "button pressed")
+                    Log.d("login_email", email)
+                    Log.d("login_password", password)
 
-                        // Need authentication...
-                        val authenticationSucceeded = theSuccess.value
-                        if(authenticationSucceeded){
-                            navController.popBackStack()
-                            navController.navigate(Screen.Home.route)
-                        } else {
-                            Toast.makeText(
-                                context, "Authentication Failed",
-                                Toast.LENGTH_SHORT).show()
-                        }
-                    })
-
+                    // Need authentication...
+                    val authenticationSucceeded = theSuccess.value
+                    if(authenticationSucceeded){
+                        navController.popBackStack()
+                        navController.navigate(Screen.Home.route)
+                    } else {
+                        Toast.makeText(
+                            context, "Authentication Failed",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }
 
     }

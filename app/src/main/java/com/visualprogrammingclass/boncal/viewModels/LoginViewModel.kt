@@ -34,7 +34,7 @@ class LoginViewModel @Inject constructor(
     fun loginThisUser(theContext: Context, loginDetail: LoginDetail) = viewModelScope.launch {
 
         endRepository.loginUser(loginDetail).let { loginResponse ->
-            Log.d("login_response", loginResponse.body()?.message.toString())
+//            Log.d("login_response", loginResponse.body()?.message.toString())
             if (loginResponse.isSuccessful) {
 
                 loginResponse.body()?.let {

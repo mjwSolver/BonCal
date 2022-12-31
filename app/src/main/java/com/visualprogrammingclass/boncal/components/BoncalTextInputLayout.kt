@@ -107,13 +107,13 @@ fun BoncalTextInputLayout(
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BoncalPasswordTextInputLayout(
+    label: String = "Password",
     password: String,
     setPassword: (String) -> Unit,
     focusManager: FocusManager
 ){
 
     var passwordVisibility by rememberSaveable { mutableStateOf(false) }
-    val label = "Password"
 
     val trailIcon = if(passwordVisibility) painterResource(id = ic_baseline_visibility_24)
     else painterResource(id = ic_baseline_visibility_off_24)
