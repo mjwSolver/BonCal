@@ -23,11 +23,8 @@ class LoginViewModel @Inject constructor(
 
     // Observables
     // =================
-//    private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-//    val token: LiveData<String> get() = _token
-
-    private val _name: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val name: LiveData<String> get() = _name
+//    private val _name: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+//    val name: LiveData<String> get() = _name
 
     private val _success: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val success: LiveData<Boolean> get() = _success
@@ -47,7 +44,7 @@ class LoginViewModel @Inject constructor(
                     _success.postValue(true)
                 }
                 // swap remember me state with just the token
-                saveOnRememberMeState(loginDetail.remember)
+//                saveOnRememberMeState(loginDetail.remember)
                 // save dulu user from UserData
 
             } else {

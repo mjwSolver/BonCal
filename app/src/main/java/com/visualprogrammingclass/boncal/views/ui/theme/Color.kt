@@ -28,6 +28,15 @@ val Teal500 = Color(0xFF14B8A6) // Teal500
 val Slate50 = Color(0xFFF8FAFC)
 val Slate900 = Color(0xFF0F172A)
 
+val Green200 = Color(0xFFBBF7D0)
+val Green600 = Color(0xFF16A34A)
+
+val Orange200 = Color(0xFFFED7AA)
+val Orange600 = Color(0xFFEA580C)
+
+val Red200 = Color(0xFFFECACA)
+val Red600 = Color(0xFFDC2626)
+
 val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400))
 
 @Composable

@@ -19,8 +19,7 @@ fun  RegisterScreen(
     navController: NavController,
     theContext: Context = LocalContext.current,
     registerViewModel: RegisterViewModel = hiltViewModel()) {
-
-    val registViewModel: RegisterViewModel = viewModel()
+    
 //    val theTokenName: State<String> = registViewModel.tokenName.observeAsState("")
 //    val theToken: State<String> = registViewModel.token.observeAsState("")
 //    val theName: State<String> = registViewModel.name.observeAsState("")

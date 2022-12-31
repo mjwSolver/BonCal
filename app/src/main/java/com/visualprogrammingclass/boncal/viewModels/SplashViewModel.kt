@@ -14,6 +14,7 @@ import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,60 +25,45 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
 
-    private val _startDestination: MutableState<String> = mutableStateOf(Screen.Welcome.route)
+    private val _startDestination: MutableState<String> = mutableStateOf(Screen.Empty.route)
     val startDestination: State<String> = _startDestination
 
-    val _theOnBoard: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
-//    val theOnBoard: LiveData<Boolean> get() = _theOnBoard
-
-    val _theRemembered: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
-//    val theRemembered: LiveData<Boolean> get() = _theRemembered
-
     init {
-        // Not working
+        // It's working but it's terrible
         viewModelScope.launch {
 
             var onBoard = false;
+            var theToken = ""
             repository.readOnBoardingState().collect { completed ->
-                if(!completed.equals(emptyPreferences())){
-                    onBoard = completed
-                    Log.d("onBoard", "splashviewModel receives ${onBoard}")
-                } else {
-                    Log.d("onBoard", "Empty Reference")
+
+                repository.readState(DataStoreRepository.PreferencesKey.userTokenKey).collect{ token ->
+                    if(!token.equals(emptyPreferences()) && (token is String)) {
+                        theToken = token
+                        if(!completed.equals(emptyPreferences())){
+                            onBoard = completed
+                            Log.d("onBoard", "splashVM receives ${onBoard}")
+                        } else {
+        //                    Log.d("onBoard", "Empty Reference")
+                        }
+
+//                            if(onBoard && theToken.isNotEmpty()){
+//                                _startDestination.value = Screen.Home.route
+//                            } else
+//                                if(onBoard) {
+//                                _startDestination.value = Screen.Login.route
+//                            } else {
+                                _startDestination.value = Screen.Welcome.route
+//                            }
+                             _isLoading.value = false
+
+                        Log.d("theToken",  "splashVM receives $theToken")
+                    } else {
+                         theToken = ""
+//                        Log.d("theToken", "Empty Reference")
+                    }
                 }
+
             }
-            Log.d("onBoard", "onBoard is ${onBoard}")
-
-
-            // Check jika udh ada token yang udh di store...
-            var remembered = false;
-            repository.readBooleanState(DataStoreRepository.PreferencesKey.rememberMeKey).collect { remember ->
-                if(!remember.equals(emptyPreferences())) {
-                    remembered = remember
-                    Log.d("rememberMe", remembered.toString())
-                } else {
-                    remembered = false
-                    Log.d("rememberMe", "Empty Reference")
-                }
-            }
-
-//            if (onBoard && remembered) {
-//                _startDestination.value = Screen.Home.route
-//            }
-
-            Log.d("onBoard", "before traveling, reads $onBoard")
-
-
-            if(onBoard && remembered){
-                _startDestination.value = Screen.Home.route
-            }
-            if(onBoard) {
-                _startDestination.value = Screen.Login.route
-            } else {
-                _startDestination.value = Screen.Welcome.route
-            }
-
-            _isLoading.value = false
         }
 
     }

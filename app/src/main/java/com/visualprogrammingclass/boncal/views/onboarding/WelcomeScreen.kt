@@ -25,9 +25,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.pager.*
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.viewModels.WelcomeViewModel
-import com.visualprogrammingclass.boncal.views.ui.theme.BoncalGradient
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
-import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
+import com.visualprogrammingclass.boncal.views.ui.theme.*
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -118,6 +116,7 @@ fun FinishButton(
 
     Row(
         modifier = modifier
+            .height(40.dp)
             .padding(horizontal = 40.dp),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Center
@@ -129,39 +128,15 @@ fun FinishButton(
             visible = pagerState.currentPage == 2
         ) {
 
-//            Button(
-//                onClick = onClick,
-//                colors = ButtonDefaults.buttonColors(
-//                    contentColor = Color.White
-//                )
-//            ) {
-//                Text(text = "Finish")
-//            }
-
             Button(
-                contentPadding = PaddingValues(),
                 onClick = onClick,
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Slate50,
-                    backgroundColor = Color.Transparent
-                ),
-            ){
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(40.dp)
-                        .background(BoncalGradient),
-                    contentAlignment = Alignment.Center,
-                ){
-                    Text(text = "Finish")
-                }
+                    contentColor = backgroundColor(),
+                    backgroundColor = foregroundColor()
+                )
+            ) {
+                Text(text = "Finish")
             }
-
-
-
-//            BoncalGradientButton(
-//                text = "Finish",
-//                onClick = onClick)
 
         }
     }

@@ -18,14 +18,15 @@ import com.visualprogrammingclass.boncal.views.onboarding.WelcomeScreen
 fun SetupNavGraph(navController: NavHostController, startDestination: String) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = startDestination
     ) {
+        composable(route = Screen.Empty.route){
+            EmptyScreen()
+        }
         composable(route = Screen.Welcome.route){
             WelcomeScreen(navController = navController)
         }
-//        composable(route = Screen.Splash.route) {
-//            AnimatedSplashScreen(navController = navController)
-//        }
+
         composable(route = Screen.Home.route){
             HomeScreen(navController = navController)
         }
