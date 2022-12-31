@@ -66,6 +66,11 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
 //            }
 
             Log.d("onBoard", "before traveling, reads $onBoard")
+
+
+            if(onBoard && remembered){
+                _startDestination.value = Screen.Home.route
+            }
             if(onBoard) {
                 _startDestination.value = Screen.Login.route
             } else {
