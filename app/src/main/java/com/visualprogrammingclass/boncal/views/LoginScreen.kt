@@ -5,6 +5,8 @@ import android.content.res.Configuration
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
@@ -39,6 +41,7 @@ fun LoginScreen(
 ){
 
     val theSuccess: State<Boolean> = loginViewModel.success.observeAsState(false)
+    val scrollState = rememberScrollState()
 //    val theTokenName: State<String> = loginViewModel.tokenName.observeAsState("")
 //    val theToken: State<String> = loginViewModel.token.observeAsState("")
 //    val theName: State<String> = loginViewModel.name.observeAsState("")
@@ -48,7 +51,8 @@ fun LoginScreen(
         Modifier
             .fillMaxSize()
             .horizontalScroll(rememberScrollState())
-            .padding(16.dp),
+            .padding(16.dp)
+            .scrollable(scrollState, orientation = Orientation.Vertical),
         contentAlignment = Alignment.Center,
 
         ){

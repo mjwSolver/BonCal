@@ -17,27 +17,29 @@ val green = Color(0xFF22C55E) // Green400
 val DarkTeal = Color(0xFF115E59) // Teal800
 
 // Logo / Primary Colors
-val Blue400 = Color(0xFF60A5FA)
-val Emerald400 = Color(0xFF34D399)
+//val Blue400 = Color(0xFF60A5FA)
+//val Emerald400 = Color(0xFF34D399)
  
 // Secondary Color
-val Sky500 = Color(0xFF0EA5E9) // Sky500
-val Teal500 = Color(0xFF14B8A6) // Teal500
+//val Sky500 = Color(0xFF0EA5E9) // Sky500
+//val Teal500 = Color(0xFF14B8A6) // Teal500
 
 // Basic Light and Dark
-val Slate50 = Color(0xFFF8FAFC)
-val Slate900 = Color(0xFF0F172A)
+//val Slate50 = Color(0xFFF8FAFC)
+//val Slate900 = Color(0xFF0F172A)
 
-val Green200 = Color(0xFFBBF7D0)
-val Green600 = Color(0xFF16A34A)
+//val Green200 = Color(0xFFBBF7D0)
+//val Green600 = Color(0xFF16A34A)
 
-val Orange200 = Color(0xFFFED7AA)
-val Orange600 = Color(0xFFEA580C)
+//val Orange200 = Color(0xFFFED7AA)
+//val Orange600 = Color(0xFFEA580C)
 
-val Red200 = Color(0xFFFECACA)
-val Red600 = Color(0xFFDC2626)
+//val Red200 = Color(0xFFFECACA)
+//val Red600 = Color(0xFFDC2626)
 
-val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400))
+//val Blue200 = Color(0xFFBFDBFE)
+
+val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400) )
 
 @Composable
 fun backgroundColor() = if(isSystemInDarkTheme()) Slate900 else Slate50

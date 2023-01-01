@@ -1,13 +1,19 @@
 package com.visualprogrammingclass.boncal.views
 
 import android.content.Context
+import android.util.Log
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,11 +53,13 @@ fun HomeScreen(
 ) {
 
     val widgetData: State<String?> = homeViewModel.widget.observeAsState()
+    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
+            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
 
         Text(text = "Welcome to the HomeScreen",
@@ -89,6 +97,7 @@ fun HomeScreen(
                 color = foregroundColor()
             ) }
         )
+        Log.d("widgetData", "${widgetData.value}")
 
     }
 }

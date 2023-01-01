@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
             if(widgetResponse.isSuccessful) {
 
                 widgetResponse.body()?.let { widgetContent ->
-                    _widget.postValue(widgetContent.data.data)
+                    _widget.postValue(widgetContent.data.image)
                 }
 
             } else {
