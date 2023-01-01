@@ -46,19 +46,19 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
         //                    Log.d("onBoard", "Empty Reference")
                         }
 
-//                            if(onBoard && theToken.isNotEmpty()){
-//                                _startDestination.value = Screen.Home.route
-//                            } else
-//                                if(onBoard) {
-//                                _startDestination.value = Screen.Login.route
-//                            } else {
+                            if(onBoard && theToken.isNotEmpty()){
+                                _startDestination.value = Screen.Home.route
+                            } else
+                                if(onBoard) {
+                                _startDestination.value = Screen.Login.route
+                            } else {
                                 _startDestination.value = Screen.Welcome.route
-//                            }
+                            }
                              _isLoading.value = false
 
                         Log.d("theToken",  "splashVM receives $theToken")
-                    } else {
-                         theToken = ""
+//                    } else {
+//                         theToken = ""
 //                        Log.d("theToken", "Empty Reference")
                     }
                 }

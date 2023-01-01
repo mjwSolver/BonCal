@@ -13,3 +13,6 @@ data class WidgetResponse(
     val title: String,
     val type: String
 )
+
+// types
+// image url ...?

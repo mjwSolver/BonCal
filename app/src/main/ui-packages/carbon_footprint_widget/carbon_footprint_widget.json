@@ -1,0 +1,792 @@
+{
+  "name": "carbon_footprint_widget",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "8KuDFIQr8rr5Ie4j0sVXqw",
+    "node": "125:124",
+    "version": "2813382801",
+    "component-id": "dbd38a81b79425eb8f19842974a0abeefb49a729"
+  },
+  "default": "DarkBackground",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "WidgetBackground"
+      },
+      {
+        "type": "vector",
+        "id": "IconBackground"
+      },
+      {
+        "type": "group",
+        "id": "boncallogolight"
+      },
+      {
+        "type": "group",
+        "id": "Group 19"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 26"
+      },
+      {
+        "type": "text",
+        "id": "Count"
+      },
+      {
+        "type": "group",
+        "id": "Frame"
+      },
+      {
+        "type": "group",
+        "id": "Logo Beta"
+      },
+      {
+        "type": "vector",
+        "id": "Vector 5"
+      },
+      {
+        "type": "vector",
+        "id": "Ellipse 1"
+      },
+      {
+        "type": "vector",
+        "id": "CarbonBackground"
+      },
+      {
+        "type": "group",
+        "id": "CarbonFootprint"
+      },
+      {
+        "type": "text",
+        "id": "Carbon footprint"
+      },
+      {
+        "type": "text",
+        "id": "CarbonPerKG"
+      },
+      {
+        "type": "text",
+        "id": "CO2e"
+      },
+      {
+        "type": "vector",
+        "id": "PlusIcon"
+      }
+    ],
+    "modes": {
+      "DarkBackground": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "WidgetBackground",
+              "IconBackground",
+              "boncallogolight",
+              "Group 19",
+              "Rectangle 26",
+              "Count",
+              "Frame"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "WidgetBackground",
+            "border-radius": "11.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "IconBackground",
+            "margin": {
+              "left": "11.0",
+              "top": "10.0",
+              "right": "240.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_background.svg"
+          },
+          {
+            "id": "boncallogolight",
+            "margin": {
+              "left": "24.0",
+              "top": "19.0",
+              "right": "253.8214111328125",
+              "bottom": "18.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "Logo Beta",
+              "Vector 5"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 19",
+            "margin": {
+              "left": "93.0",
+              "top": "10.0",
+              "right": "84.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "is-structured": "false",
+            "children": [
+              "CarbonBackground",
+              "CarbonFootprint"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 26",
+            "margin": {
+              "left": "248.0",
+              "top": "10.0",
+              "right": "8.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_26.svg"
+          },
+          {
+            "id": "Count",
+            "margin": {
+              "left": "261.0",
+              "top": "46.0",
+              "right": "20.0",
+              "bottom": "20.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "Count",
+            "overflow": "visible",
+            "text-align": "left",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "Frame",
+            "margin": {
+              "left": "270.0",
+              "top": "21.0",
+              "right": "29.0",
+              "bottom": "38.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "PlusIcon"
+            ]
+          },
+          {
+            "id": "Logo Beta",
+            "is-structured": "false",
+            "children": [
+              "Ellipse 1"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Vector 5",
+            "margin": {
+              "left": "14.562394973065551",
+              "top": "15.076524449558065",
+              "right": "15.264277580950562",
+              "bottom": "14.21593885305424"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_5.svg"
+          },
+          {
+            "id": "Ellipse 1",
+            "margin": {
+              "left": "0.000002692852607566465",
+              "top": "0.000002741813236895041",
+              "right": "0.00001638063372411125",
+              "bottom": "0.000004887581297907673"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "ellipse_1.svg"
+          },
+          {
+            "id": "CarbonBackground",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "carbon_background.svg"
+          },
+          {
+            "id": "CarbonFootprint",
+            "margin": {
+              "left": "13.0",
+              "top": "13.0",
+              "right": "18.0",
+              "bottom": "12.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "Carbon footprint",
+              "CarbonPerKG",
+              "CO2e"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Carbon footprint",
+            "margin": {
+              "bottom": "22.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "Carbon footprint",
+            "overflow": "visible",
+            "text-align": "left",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "CarbonPerKG",
+            "margin": {
+              "top": "15.0",
+              "right": "49.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "$carbonPerKgText",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "20.0",
+            "line-height": "1.2102272033691406",
+            "typeface": "Inter"
+          },
+          {
+            "id": "CO2e",
+            "margin": {
+              "left": "70.0",
+              "top": "20.0",
+              "right": "6.0",
+              "bottom": "2.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "CO2e",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "bottom",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "PlusIcon",
+            "margin": "4.5",
+            "tap-handler": "$onTap",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "plus_icon.svg"
+          }
+        ]
+      },
+      "LightBackground": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "WidgetBackground",
+              "IconBackground",
+              "boncallogolight",
+              "Group 19",
+              "Rectangle 26",
+              "Count",
+              "Frame"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "WidgetBackground",
+            "border-radius": "11.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            }
+          },
+          {
+            "id": "IconBackground",
+            "margin": {
+              "left": "11.0",
+              "top": "10.0",
+              "right": "240.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "icon_background1.svg"
+          },
+          {
+            "id": "boncallogolight",
+            "margin": {
+              "left": "24.0",
+              "top": "19.0",
+              "right": "253.8214111328125",
+              "bottom": "18.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "Logo Beta",
+              "Vector 5"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Group 19",
+            "margin": {
+              "left": "93.0",
+              "top": "10.0",
+              "right": "84.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "is-structured": "false",
+            "children": [
+              "CarbonBackground",
+              "CarbonFootprint"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Rectangle 26",
+            "margin": {
+              "left": "248.0",
+              "top": "10.0",
+              "right": "8.0",
+              "bottom": "9.0"
+            },
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "rectangle_27.svg"
+          },
+          {
+            "id": "Count",
+            "margin": {
+              "left": "261.0",
+              "top": "46.0",
+              "right": "20.0",
+              "bottom": "20.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "Count",
+            "overflow": "visible",
+            "text-align": "left",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "Frame",
+            "margin": {
+              "left": "270.0",
+              "top": "21.0",
+              "right": "29.0",
+              "bottom": "38.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "PlusIcon"
+            ]
+          },
+          {
+            "id": "Logo Beta",
+            "is-structured": "false",
+            "children": [
+              "Ellipse 1"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Vector 5",
+            "margin": {
+              "left": "14.562394973065551",
+              "top": "15.076524449558065",
+              "right": "15.264277580950562",
+              "bottom": "14.21593885305424"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "vector_6.svg"
+          },
+          {
+            "id": "Ellipse 1",
+            "margin": {
+              "left": "0.000002692852607566465",
+              "top": "0.000002741813236895041",
+              "right": "0.00001638063372411125",
+              "bottom": "0.000004887581297907673"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "ellipse_2.svg"
+          },
+          {
+            "id": "CarbonBackground",
+            "border-radius": "10.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "carbon_background1.svg"
+          },
+          {
+            "id": "CarbonFootprint",
+            "margin": {
+              "left": "13.0",
+              "top": "13.0",
+              "right": "18.0",
+              "bottom": "12.0"
+            },
+            "is-structured": "false",
+            "children": [
+              "Carbon footprint",
+              "CarbonPerKG",
+              "CO2e"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "Carbon footprint",
+            "margin": {
+              "bottom": "22.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "Carbon footprint",
+            "overflow": "visible",
+            "text-align": "left",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "CarbonPerKG",
+            "margin": {
+              "top": "15.0",
+              "right": "49.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "$carbonPerKgText",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "20.0",
+            "line-height": "1.2102272033691406",
+            "typeface": "Inter"
+          },
+          {
+            "id": "CO2e",
+            "margin": {
+              "left": "70.0",
+              "top": "20.0",
+              "right": "6.0",
+              "bottom": "2.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "font-weight": "700.0",
+            "color": {
+              "alpha": "1.0",
+              "hue": "221.21212121212122",
+              "saturation": "0.8425531914893617",
+              "value": "0.9215686274509803"
+            },
+            "text-content": "CO2e",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-align-vertical": "bottom",
+            "line-height": "1.2102272851126534",
+            "typeface": "Inter"
+          },
+          {
+            "id": "PlusIcon",
+            "margin": "4.5",
+            "tap-handler": "$onTap",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "plus_icon1.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "carbonPerKgText": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
+    "onTap": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "DarkBackground",
+      "size": {
+        "width": 323.0,
+        "height": 83.0
+      },
+      "parameters": {
+        "carbonPerKgText": "100KG"
+      }
+    },
+    {
+      "design": "LightBackground",
+      "size": {
+        "width": 323.0,
+        "height": 83.0
+      },
+      "parameters": {
+        "carbonPerKgText": "100KG"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
