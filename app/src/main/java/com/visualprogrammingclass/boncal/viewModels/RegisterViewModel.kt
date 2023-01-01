@@ -19,10 +19,9 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val endRepository: EndPointRepository,
     private val dataRepository: DataStoreRepository
-)
-    :ViewModel() {
+) :ViewModel() {
 
-    private val _success: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    private val _success: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>(false) }
     val success: LiveData<Boolean> get()=_success
 
     // =====================================================
@@ -36,19 +35,20 @@ class RegisterViewModel @Inject constructor(
                     Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                     saveUserToken(it.data.token)
                     saveUserDataWithToken(it.data.token)
-                    _success.postValue(true)
+                    _success.value = true
+                    Log.d("regist_success", "${ _success.value }")
                 }
 
             } else {
                 registerResponse.body()?.let {
-                    Log.e("regist, registVM", "Registration ${it.message}")
+                    Log.e("regist_fail", "Registration ${it.message}")
                     Toast.makeText(context, "Registration ${it.message}", Toast.LENGTH_SHORT).show()
                 }
                 _success.postValue(false)
             }
 
         }
-    }
+    }.invokeOnCompletion { Log.d("registerThisUser", "Completed") }
 
     // Save User Token Function
     // =================

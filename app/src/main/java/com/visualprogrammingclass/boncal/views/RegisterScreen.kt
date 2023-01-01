@@ -48,7 +48,7 @@ fun  RegisterScreen(
     registerViewModel: RegisterViewModel = hiltViewModel()) {
 
     val theSuccess: State<Boolean> = registerViewModel.success.observeAsState(false)
-    val scrollState = rememberScrollState()
+//    val scrollState = rememberScrollState()
 
     Box(
 //        modifier = Modifier
@@ -57,8 +57,8 @@ fun  RegisterScreen(
         contentAlignment = Alignment.Center
     ){
         Column(
-            modifier = Modifier.fillMaxSize().padding(8.dp)
-                .verticalScroll(state = scrollState),
+            modifier = Modifier.fillMaxSize().padding(8.dp),
+//                .verticalScroll(state = scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -127,6 +127,7 @@ fun  RegisterScreen(
                         context,
                         RegisterDetail(name,email,password,repeat)
                     )
+
                     Log.d("regist_button", "button pressed")
                     Log.d("regist_email", email)
                     Log.d("regist_password", password)
@@ -134,8 +135,8 @@ fun  RegisterScreen(
                     // Need authentication...
                     val authenticationSucceeded = theSuccess.value
                     if(authenticationSucceeded){
-                        navController.popBackStack()
-                        navController.navigate(Screen.Home.route)
+//                        navController.popBackStack()
+//                        navController.navigate(Screen.Home.route)
                     } else {
                         Toast.makeText(
                             context, "Authentication Failed",

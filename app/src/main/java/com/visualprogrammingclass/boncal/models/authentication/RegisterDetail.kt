@@ -1,8 +1,10 @@
 package com.visualprogrammingclass.boncal.models.authentication
 
+import com.google.gson.annotations.SerializedName
+
 data class RegisterDetail(
-    val name: String,
-    val email: String,
-    val password: String,
-    val repeat: String
+    @SerializedName("name") val name: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String,
+    @SerializedName("repeat") val repeat: String
 )

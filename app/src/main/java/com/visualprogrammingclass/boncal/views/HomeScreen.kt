@@ -53,13 +53,13 @@ fun HomeScreen(
 ) {
 
     val widgetData: State<String?> = homeViewModel.widget.observeAsState()
-    val scrollState = rememberScrollState()
+//    val scrollState = rememberScrollState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(8.dp)
-            .scrollable(state = scrollState, orientation = Orientation.Vertical)
+//            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
 
         Text(text = "Welcome to the HomeScreen",

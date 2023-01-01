@@ -10,5 +10,5 @@ fun LeaderboardScreen(
     navController: NavController,
     leaderBoardViewModel: LeaderboardViewModel = hiltViewModel()
 ){
-    
+
 }
