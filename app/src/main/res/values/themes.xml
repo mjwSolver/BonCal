@@ -3,6 +3,8 @@
 
     <style name="Theme.BonCal" parent="android:Theme.Material.Light.NoActionBar" />
 
+
+
     <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/slate900</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/lightsplashlogo</item>

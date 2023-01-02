@@ -2,6 +2,7 @@ package com.visualprogrammingclass.boncal.services.retrofit
 
 import com.visualprogrammingclass.boncal.models.*
 import com.visualprogrammingclass.boncal.models.authentication.*
+import com.visualprogrammingclass.boncal.models.safetyfirst.CarbonEmissionResponse
 import com.visualprogrammingclass.boncal.models.widgets.WidgetResponse
 import retrofit2.Response
 import retrofit2.http.*
@@ -43,6 +44,19 @@ interface EndPointAPI {
     // ============
     // ...
     // ============
+
+    // using list directly here
+    @GET("/api/available-emmission-types")
+    suspend fun getAvailableEmissionTypes(
+        @Header("Authorization") token:String
+    ): Response<ApiResponse<List<SingleAvailableEmissionType>>>
+
+    @POST("/api/carbon-footprint")
+    suspend fun sendCarbonEmissionData(
+        @Header("Authorization") token:String,
+        @Body carbonEmissionDetail: CarbonEmissionDetail
+    ): Response<ApiResponse<CarbonEmissionResponse>>
+
 
     @GET("/api/emission/list-categories")
     suspend fun getListOfCategories(

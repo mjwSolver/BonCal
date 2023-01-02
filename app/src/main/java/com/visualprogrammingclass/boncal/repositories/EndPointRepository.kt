@@ -1,5 +1,6 @@
 package com.visualprogrammingclass.boncal.repositories
 
+import com.visualprogrammingclass.boncal.models.CarbonEmissionDetail
 import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
 import com.visualprogrammingclass.boncal.models.authentication.RegisterDetail
 import com.visualprogrammingclass.boncal.services.retrofit.EndPointAPI
@@ -19,5 +20,12 @@ class EndPointRepository @Inject constructor(private val api: EndPointAPI) {
 
     // Getting WidgetData
     suspend fun getWidgetData(token:String) = api.getWidgetData(token = "Bearer $token")
+
+    suspend fun getEmissionTypes(token:String) = api.getAvailableEmissionTypes(token = "Bearer $token")
+
+    suspend fun getEmissionTypes(
+        token:String,
+        carbonFootPrintDetail:CarbonEmissionDetail
+    ) = api.sendCarbonEmissionData(token = "Bearer $token", carbonFootPrintDetail)
 
 }

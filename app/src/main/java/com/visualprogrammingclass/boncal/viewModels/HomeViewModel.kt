@@ -26,24 +26,50 @@ class HomeViewModel @Inject constructor(
     private val _widget: MutableLiveData<String> by lazy { MutableLiveData<String>("") }
     val widget: LiveData<String> get()=_widget
 
+    // Async and Await moment?
     fun getLatestWidgetData() = viewModelScope.launch {
 
-        getUserToken()
+        getUserToken().invokeOnCompletion {
+            if(it === null){
 
-        endRepository.getWidgetData(_token.value.toString()).let{ widgetResponse ->
+                viewModelScope.launch {
+                    endRepository.getWidgetData(_token.value.toString()).let{ widgetResponse ->
 
-            if(widgetResponse.isSuccessful) {
+                        if(widgetResponse.isSuccessful) {
 
-                widgetResponse.body()?.let { widgetContent ->
-                    _widget.postValue(widgetContent.data.image)
+                            widgetResponse.body()?.let { widgetContent ->
+                                _widget.postValue(widgetContent.data.image)
+                            }
+
+                        } else {
+                            Log.d("Widget", "Data Retrieval Failed")
+                        }
+                    }
                 }
 
-            } else {
-                Log.d("Widget", "Data Retrieval Failed")
             }
-
         }
+
     }
+
+//    fun getLatestWidgetData() = viewModelScope.launch {
+//
+//        getUserToken()
+//
+//        endRepository.getWidgetData(_token.value.toString()).let{ widgetResponse ->
+//
+//            if(widgetResponse.isSuccessful) {
+//
+//                widgetResponse.body()?.let { widgetContent ->
+//                    _widget.postValue(widgetContent.data.image)
+//                }
+//
+//            } else {
+//                Log.d("Widget", "Data Retrieval Failed")
+//            }
+//
+//        }
+//    }
 
     fun getUserToken() = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.readState(DataStoreRepository.PreferencesKey.userTokenKey).collect{ token->

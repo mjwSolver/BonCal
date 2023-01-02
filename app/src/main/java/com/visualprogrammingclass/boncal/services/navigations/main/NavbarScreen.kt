@@ -1,6 +1,7 @@
 package com.visualprogrammingclass.boncal.services.navigations.main
 
 import com.visualprogrammingclass.boncal.R
+import com.visualprogrammingclass.boncal.services.navigations.Screen
 
 sealed class NavbarScreen(
     val route:String,
@@ -18,4 +19,11 @@ sealed class NavbarScreen(
         )
     }
 
+}
+
+sealed class NavbarScreenChildren(
+    val route: String
+){
+    object Category: NavbarScreenChildren("category_screen")
+    object Calculate: NavbarScreenChildren("calculate_screen")
 }

@@ -9,9 +9,4 @@ sealed class Screen(val route:String) {
 
     object Main: Screen("main_screen")
     object Home: Screen("home_screen")
-    // in NavBarScreen
-        object Category: Screen("category_screen")
-        object Calculate: Screen("calculate_screen")
-//    object Leaderboard: Screen("leaderboard_screen")
-//    object Profile: Screen("profile_screen")
 }

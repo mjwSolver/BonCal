@@ -37,6 +37,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.visualprogrammingclass.boncal.R
+import com.visualprogrammingclass.boncal.components.TheCarbonFootprintWidget
 import com.visualprogrammingclass.boncal.helpers.statics
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.viewModels.HomeViewModel
@@ -61,6 +62,8 @@ fun HomeScreen(
             .padding(8.dp)
 //            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
+
+        TheCarbonFootprintWidget(onPlusButtonClick = { /*TODO*/ })
 
         Text(text = "Welcome to the HomeScreen",
             color = foregroundColor())

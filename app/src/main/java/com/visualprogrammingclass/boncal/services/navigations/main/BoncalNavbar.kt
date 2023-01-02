@@ -1,9 +1,11 @@
 package com.visualprogrammingclass.boncal.services.navigations
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -32,7 +34,7 @@ fun BoncalNavbar(
 
     Row(
         modifier= Modifier
-            .background(Slate900)
+            .background(backgroundColor())
             .padding(8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,
@@ -59,8 +61,16 @@ fun BoncalNavbar(
 @Composable
 fun BoncalBottomNavigationItem(item: NavbarScreen, isSelected:Boolean, onClick:()->Unit){
 
-    val background = if (isSelected) Blue400.copy(alpha = 0.1f) else Color.Transparent
-    val contentColor = if (isSelected) Sky500 else Emerald400
+    val background =
+        if(isSystemInDarkTheme())
+            if (isSelected) Blue400.copy(alpha = 0.1f) else Color.Transparent
+        else
+            if (isSelected) Blue600.copy(alpha = 0.1f) else Color.Transparent
+    val contentColor =
+        if(isSystemInDarkTheme())
+            if (isSelected) Sky500 else Emerald400
+        else
+            if (isSelected) Sky500 else Teal500
 
     Box(
         modifier = Modifier
@@ -110,6 +120,21 @@ fun Prev1(){
 //    }
 }
 
+@Composable
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+fun Prev1Dark(){
+
+//    val navController = rememberNavController()
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+
+//    if (currentDestination != null) {
+    BoncalNavbarToPreview(
+        currentScreenRoute = NavbarScreen.LeaderboardNB.route) {
+    }
+//    }
+}
+
 @ExperimentalAnimationApi
 @Composable
 @Preview
@@ -130,7 +155,7 @@ fun BoncalNavbarToPreview(
 
     Row(
         modifier= Modifier
-            .background(Slate900)
+            .background(backgroundColor())
             .padding(8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,

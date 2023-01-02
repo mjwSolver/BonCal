@@ -6,10 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.visualprogrammingclass.boncal.services.navigations.Screen
-import com.visualprogrammingclass.boncal.views.EmptyScreen
-import com.visualprogrammingclass.boncal.views.HomeScreen
-import com.visualprogrammingclass.boncal.views.LeaderboardScreen
-import com.visualprogrammingclass.boncal.views.ProfileScreen
+import com.visualprogrammingclass.boncal.views.*
 
 @ExperimentalAnimationApi
 @Composable
@@ -25,6 +22,9 @@ fun SetupNavBarGraph(navController: NavHostController, startDestination: String)
 //            HomeScreen(navController = navController)
             HomeScreen()
         }
+        composable(route = NavbarScreenChildren.Category.route){ CategoryScreen(navController) }
+        composable(route = NavbarScreenChildren.Calculate.route){ CalculateScreen(navController) }
+
         composable(route = NavbarScreen.LeaderboardNB.route){
 //            LeaderboardScreen(navController = navController)
             LeaderboardScreen()
