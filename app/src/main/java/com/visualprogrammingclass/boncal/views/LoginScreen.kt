@@ -126,7 +126,7 @@ fun LoginScreen(
                     val authenticationSucceeded = theSuccess.value
                     if(authenticationSucceeded){
                         navController.popBackStack()
-                        navController.navigate(Screen.Home.route)
+                        navController.navigate(Screen.Main.route)
                     } else {
                         Toast.makeText(
                             context, "Authentication Failed",

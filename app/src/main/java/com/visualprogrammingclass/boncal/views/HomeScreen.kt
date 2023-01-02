@@ -47,7 +47,7 @@ import com.visualprogrammingclass.boncal.views.ui.theme.foregroundColor
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
+//    navController: NavController,
     context: Context = LocalContext.current,
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {

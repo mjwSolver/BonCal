@@ -16,12 +16,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import com.visualprogrammingclass.boncal.services.navigations.main.NavbarScreen
 import com.visualprogrammingclass.boncal.views.ui.theme.*
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BoncalNavbar(
-    currentScreenRoute:String,
+    currentScreenRoute: NavDestination,
     onItemSelected:(NavbarScreen)->Unit
 ) {
 
@@ -36,12 +39,16 @@ fun BoncalNavbar(
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        navBarItems.forEach { item ->
 
-            BoncalBottomNavigationItem(item = item, isSelected = item.route == currentScreenRoute) {
+        navBarItems.forEach { item ->
+            BoncalBottomNavigationItem(
+                item = item,
+//                isSelected = item.route == currentScreenRoute
+                isSelected = currentScreenRoute.hierarchy.any{ it.route == item.route },
+
+            ) {
                 onItemSelected(item) // onClick Response
             }
-
         }
 
     }
@@ -50,7 +57,7 @@ fun BoncalNavbar(
 
 @ExperimentalAnimationApi
 @Composable
-fun BoncalBottomNavigationItem(item:NavbarScreen, isSelected:Boolean, onClick:()->Unit){
+fun BoncalBottomNavigationItem(item: NavbarScreen, isSelected:Boolean, onClick:()->Unit){
 
     val background = if (isSelected) Blue400.copy(alpha = 0.1f) else Color.Transparent
     val contentColor = if (isSelected) Sky500 else Emerald400
@@ -91,9 +98,16 @@ fun BoncalBottomNavigationItem(item:NavbarScreen, isSelected:Boolean, onClick:()
 @Composable
 @Preview
 fun Prev1(){
-    BoncalNavbar(currentScreenRoute = NavbarScreen.HomeNB.route) {
 
-    }
+//    val navController = rememberNavController()
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination
+
+//    if (currentDestination != null) {
+        BoncalNavbarToPreview(
+            currentScreenRoute = NavbarScreen.LeaderboardNB.route) {
+        }
+//    }
 }
 
 @ExperimentalAnimationApi
@@ -103,4 +117,37 @@ fun Prev2() {
     BoncalBottomNavigationItem(item = NavbarScreen.HomeNB, isSelected = true) {
 
     }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun BoncalNavbarToPreview(
+    currentScreenRoute: String,
+    onItemSelected:(NavbarScreen)->Unit
+) {
+
+    val navBarItems = NavbarScreen.Items.list
+
+    Row(
+        modifier= Modifier
+            .background(Slate900)
+            .padding(8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+
+        navBarItems.forEach { item ->
+            BoncalBottomNavigationItem(
+                item = item,
+                isSelected = item.route == currentScreenRoute
+//                isSelected = currentScreenRoute.hierarchy.any{ it.route == item.route },
+                ) {
+                onItemSelected(item) // onClick Response
+            }
+        }
+
+    }
+
 }

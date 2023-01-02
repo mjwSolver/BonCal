@@ -3,6 +3,7 @@ package com.visualprogrammingclass.boncal.services.navigations
 import android.content.Intent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -27,10 +28,6 @@ fun SetupNavGraph(navController: NavHostController, startDestination: String) {
             WelcomeScreen(navController = navController)
         }
 
-        composable(route = Screen.Home.route){
-            HomeScreen(navController = navController)
-        }
-
         composable(route = Screen.Login.route){
             LoginScreen(navController = navController)
         }
@@ -38,6 +35,20 @@ fun SetupNavGraph(navController: NavHostController, startDestination: String) {
         composable(route = Screen.Register.route){
             RegisterScreen(navController = navController)
         }
+
+        composable(route = Screen.Main.route){
+            MainScreen(navController = navController)
+        }
+
+//        composable(route = Screen.Home.route){
+//            HomeScreen(navController = navController)
+//        }
+
+
+//        object Category: Screen("category_screen")
+//        object Calculate: Screen("calculate_screen")
+//        object Leaderboard: Screen("leaderboard_screen")
+//        object Profile: Screen("profile_screen")
 
     }
 }

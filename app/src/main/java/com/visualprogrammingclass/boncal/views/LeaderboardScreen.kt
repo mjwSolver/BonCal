@@ -7,7 +7,7 @@ import com.visualprogrammingclass.boncal.viewModels.LeaderboardViewModel
 
 @Composable
 fun LeaderboardScreen(
-    navController: NavController,
+//    navController: NavController,
     leaderBoardViewModel: LeaderboardViewModel = hiltViewModel()
 ){
 
