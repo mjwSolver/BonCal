@@ -41,7 +41,10 @@ fun boncalRoundedShape():Shape {
 }
 
 @Composable
-fun TheCarbonFootprintWidget() {
+fun TheCarbonFootprintWidget(
+    onPlusButtonClick: () -> Unit,
+    carbonKg: String = "0"
+) {
     Row(
         modifier = Modifier
             .background(backgroundColor())
@@ -53,6 +56,7 @@ fun TheCarbonFootprintWidget() {
         // The Logo
         Box(
             modifier = Modifier
+                .size(90.dp)
                 .clip(boncalRoundedShape())
                 .background(Teal500)
                 .padding(18.dp),
@@ -76,21 +80,24 @@ fun TheCarbonFootprintWidget() {
         // Carbon FootPrint
         Box(
             modifier = Modifier
+                .height(90.dp)
                 .clip(boncalRoundedShape())
-                .padding(4.dp)
                 .background(Blue200)
                 .padding(18.dp)
         ){
-            Column() {
 
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
                 val baseStyle = TextStyle(
                     color = Blue600,
-                    fontSize = 13.sp
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Medium
                 )
                 val boldedStyle = TextStyle(
                     color = Blue600,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
                 )
                 val subScriptStyle = TextStyle(
                     color = Blue600,
@@ -100,25 +107,33 @@ fun TheCarbonFootprintWidget() {
 
                 Text(text = "Carbon Footprint", style = baseStyle)
 
+                Spacer(modifier = Modifier.padding(1.dp))
+
                 Row(
-                    modifier = Modifier
+                    modifier = Modifier,
+                    horizontalArrangement = Arrangement.Start,
+//                    verticalAlignment = Alignment.Bottom
                 ) {
-                    Text(text = "100KG", style = boldedStyle)
+                    Text(text = "${carbonKg}KG", style = boldedStyle)
                     Text(
+                        modifier = Modifier
+                            .padding(top = 4.dp),
                         fontSize = 13.sp,
                         text = buildAnnotatedString {
                             withStyle(
                                 SpanStyle(
                                     fontSize = 16.sp,
+                                    fontWeight = FontWeight.Medium,
                                     color = Blue600
                                 )
                             ) {
                                 append("CO")
-                                Spacer(modifier = Modifier.padding(3.dp))
+                                Spacer(modifier = Modifier.padding(1.dp))
                                 withStyle(
                                     SpanStyle(
                                         baselineShift = BaselineShift.Subscript,
                                         fontSize = 10.sp,
+                                        fontWeight = FontWeight.Medium,
                                         color = Blue600
                                     )
                                 ) {
@@ -137,32 +152,41 @@ fun TheCarbonFootprintWidget() {
         // Carbon Add
         Box(
             modifier = Modifier
-//                .size(50.dp, 50.dp)
-                .padding(4.dp)
-        ){
-
-            Box(modifier = Modifier
+                .height(90.dp)
                 .clip(boncalRoundedShape())
                 .background(Blue200)
-                .padding(horizontal = 10.dp, vertical = 6.dp)){
+//                .height(90.dp)
+                .padding(10.dp)
+        ){
+
+//            Box(modifier = Modifier
+////                .padding(horizontal = 8.dp, vertical = 6.dp)
+//            ){
                 Column(
-                    modifier = Modifier.padding(horizontal = 10.dp),
+                    modifier = Modifier.padding(
+                        horizontal = 7.dp,
+//                        vertical = 3.dp
+                    ),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                    verticalArrangement = Arrangement.Top
                 ) {
-                    IconButton(onClick = { TODO() } ) {
+                    IconButton(onClick =  onPlusButtonClick ) {
                         Icon(
-                            imageVector = Icons.Default.Add,
+//                            modifier = Modifier.size(20.dp),
+                            imageVector = Icons.Filled.Add,
                             contentDescription = "Add Icon",
                             tint = Blue600
                         )
                     }
 
                     Text(
+//                        modifier = Modifier.padding(bottom = 5.dp),
                         text = "Count",
-                        color = Blue600
+                        color = Blue600,
+                        fontWeight = FontWeight.Medium
+
                     )
-                }
+//                }
             }
 
         }
@@ -173,11 +197,11 @@ fun TheCarbonFootprintWidget() {
 @Composable
 @Preview
 fun CarbonFootprintWidgetPreview(){
-    TheCarbonFootprintWidget()
+    TheCarbonFootprintWidget(onPlusButtonClick = {})
 }
 
 @Composable
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 fun CarbonFootprintWidgetDarkPreview(){
-    TheCarbonFootprintWidget()
+    TheCarbonFootprintWidget(onPlusButtonClick = {})
 }
