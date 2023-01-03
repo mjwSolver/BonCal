@@ -1,18 +1,19 @@
 package com.visualprogrammingclass.boncal.viewModels
 
 import android.util.Log
-import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +29,9 @@ class HomeViewModel @Inject constructor(
 
     // Async and Await moment?
     fun getLatestWidgetData() = viewModelScope.launch {
+
+        val fetchUserToken = async {getAndReturnUserToken()}
+        var theUserToken = fetchUserToken.await()
 
         getUserToken().invokeOnCompletion {
             if(it === null){
@@ -71,8 +75,22 @@ class HomeViewModel @Inject constructor(
 //        }
 //    }
 
+    suspend fun getAndReturnUserToken(): Flow<String> = flow {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.readState(DataStoreRepository.PreferencesKey.userTokenKey).cancellable().collect{ token->
+
+                if(token == emptyPreferences()) { return@collect }
+                if(token !is String) { return@collect }
+
+                _token.postValue(token.toString())
+            }
+        }
+        emit("")
+    }
+
+
     fun getUserToken() = viewModelScope.launch(Dispatchers.IO) {
-        dataRepository.readState(DataStoreRepository.PreferencesKey.userTokenKey).collect{ token->
+        dataRepository.readState(DataStoreRepository.PreferencesKey.userTokenKey).cancellable().collect{ token->
 
             if(token == emptyPreferences()) { return@collect }
             if(token !is String) { return@collect }
