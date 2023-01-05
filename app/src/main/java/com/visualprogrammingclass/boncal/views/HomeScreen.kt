@@ -3,6 +3,8 @@ package com.visualprogrammingclass.boncal.views
 import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
@@ -11,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -27,8 +30,12 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.components.BoncalGradientButton
+import com.visualprogrammingclass.boncal.components.CoilIconImage
 import com.visualprogrammingclass.boncal.components.ImageCard
 import com.visualprogrammingclass.boncal.components.TheCarbonFootprintWidget
+import com.visualprogrammingclass.boncal.models.article.ArrayListOfArticleResponse
+import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
+import com.visualprogrammingclass.boncal.services.navigations.main.NavbarScreen
 import com.visualprogrammingclass.boncal.services.navigations.main.NavbarScreenChildren
 import com.visualprogrammingclass.boncal.viewModels.HomeViewModel
 import com.visualprogrammingclass.boncal.views.ui.theme.Inter
@@ -46,11 +53,10 @@ fun HomeScreen(
 //    LaunchedEffect(key1 = widgetData) {
     homeViewModel.getLatestAirQualityWidgetData()
 //    }
-
     val widgetData: State<String?> = homeViewModel.airQualityWidget.observeAsState()
     Log.d("widgetData", "${widgetData.value}")
 
-//    val scrollState = rememberScrollState()
+    val articles: State<ArrayList<ArticleResponseItem>?> = homeViewModel.articles.observeAsState()
 
     val scrollState = rememberScrollState()
 
@@ -121,7 +127,7 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.padding(14.dp))
 
-            Text(text = "GoGreen by funding Reforestation Programs!",
+            Text(text = "Articles",
                 style = TextStyle(
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 24.sp,
@@ -132,8 +138,22 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.padding(14.dp))
             // create a list here
-            ImageCard(painter = painterResource(id = R.drawable.boncallogoblack)
-                , contentDescription = "boncallogoblack", title = "Boncal Logo Black")
+
+            LazyRow(
+                contentPadding = PaddingValues(all = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+
+                articles.value?.let {
+                    items(count = it.size) { article ->
+
+                        CoilIconImage(imageUrl = article.
+                            ,contentDescription = "boncallogoblack", title = "${article.title}")
+                    }
+
+                }
+
+            }
 
         }
 

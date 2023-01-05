@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -15,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,6 +29,9 @@ import com.visualprogrammingclass.boncal.viewModels.CategoryViewModel
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
+import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.helpers.JsonConvertible.Companion.fromJson
 import com.visualprogrammingclass.boncal.models.SingleAvailableEmissionType
 import com.visualprogrammingclass.boncal.views.ui.theme.*
@@ -85,10 +91,10 @@ fun CategoryScreen(
         }
 
         Text(
-            text = "Selection Emission Type",
+            text = "Select your Emission Type",
             style = TextStyle(
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Normal,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 fontFamily = Inter,
                 color = foregroundColor()
             ),
@@ -107,7 +113,7 @@ fun CategoryScreen(
                             modifier = Modifier
                                 .aspectRatio(1F)
                                 .background(
-                                    color = Color(it[i].BackgroundColor.toLong())
+                                    color = Color(android.graphics.Color.parseColor("#${ it[i].BackgroundColor.takeLast(6) }"))
                                 )
                                 .padding(4.dp)
                                 .clickable(onClick = {
@@ -120,12 +126,27 @@ fun CategoryScreen(
                                 }
                                 )
                         ) {
+
+                            SubcomposeAsyncImage (
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .placeholder(R.drawable.ic_baseline_visibility_24)
+                                    .data(it[i].Icon)
+                                    .error(R.drawable.ic_baseline_visibility_off_24)
+                                    .crossfade( true)
+                                    .build(),
+                                contentDescription = "Icons",
+                                contentScale = ContentScale.Crop,
+                                loading = { CircularProgressIndicator(
+                                    color = foregroundColor()
+                                ) }
+                            )
+
                             Text(text = it[i].Name, style = TextStyle(
-                                color = Color(android.graphics.Color.parseColor("#${ it[0].ForegroundColor.takeLast(6) }"))
+                                color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
 //                                color = Color(it[0].ForegroundColor.toLong())
                             ))
                             Text(text = "(${it[i].Unit})", style = TextStyle(
-                                color = Color(it[0].ForegroundColor.toLong())
+                                color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
 //                                color = Color(it[0].ForegroundColor.toLong())
                             ))
                         }

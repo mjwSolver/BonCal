@@ -8,7 +8,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.statics
+import com.visualprogrammingclass.boncal.models.article.ArrayListOfArticleResponse
+import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +32,9 @@ class HomeViewModel @Inject constructor(
     private val _airQualityWidget: MutableLiveData<String> by lazy { MutableLiveData<String>("") }
     val airQualityWidget: LiveData<String> get()=_airQualityWidget
 
+    private val _articles: MutableLiveData<ArrayList<ArticleResponseItem>?> by lazy { MutableLiveData<ArrayList<ArticleResponseItem>?>("") }
+    val articles: LiveData<ArrayList<ArticleResponseItem>?> get()=_articles
+
     init{
         getUserToken().invokeOnCompletion {
             Log.d("HomeVM", "_token when complete is now ${_token.value.toString()}")
@@ -36,6 +42,27 @@ class HomeViewModel @Inject constructor(
         Log.d("HomeVM", "_token fresh is now ${_token.value.toString()}")
 
         getLatestAirQualityWidgetData()
+    }
+
+    // Air Quality Widget
+    // =============
+    fun getArticles() = viewModelScope.launch{
+        endRepository.getArticleData().let { arraylistofArticlesResponse ->
+            if(arraylistofArticlesResponse.isSuccessful){
+
+                arraylistofArticlesResponse.body()?.let { arrayListOfArticles ->
+
+                   withContext(Dispatchers.Main){
+                    _articles.value = arrayListOfArticles.data
+                       Log.d("HomeVM", "Successfully acquired Articles")
+                   }
+                }
+
+            } else {
+                Log.e("HomeVM", "Failed to get Articles")
+            }
+
+        }
     }
 
 
