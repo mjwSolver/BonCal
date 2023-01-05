@@ -3,6 +3,7 @@ package com.visualprogrammingclass.boncal.services.navigations.main
 import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 
+
 sealed class NavbarScreen(
     val route:String,
     val title:String,
@@ -21,9 +22,19 @@ sealed class NavbarScreen(
 
 }
 
+const val CALCULATE_REQUIRED_CATEGORY_ID = "category_id"
+
 sealed class NavbarScreenChildren(
     val route: String
 ){
     object Category: NavbarScreenChildren("category_screen")
-    object Calculate: NavbarScreenChildren("calculate_screen")
+    object Calculate: NavbarScreenChildren("calculate_screen/{$CALCULATE_REQUIRED_CATEGORY_ID}"){
+        fun passId(id:Int):String{
+            return this.route.replace(
+                oldValue = "{$CALCULATE_REQUIRED_CATEGORY_ID}",
+                newValue = id.toString()
+            )
+        }
+    }
+    object WidgetWebView: NavbarScreenChildren("widgetwebview_screen")
 }

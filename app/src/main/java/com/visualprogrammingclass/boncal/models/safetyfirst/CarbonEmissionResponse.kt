@@ -9,10 +9,11 @@ data class CarbonEmissionResponse(
     val CreatedAt: String,
     val DeletedAt: Any,
     val UpdatedAt: String,
-    val EmissionType: SingleAvailableEmissionType, // Hati hati
+    val EmissionType: SingleAvailableEmissionType,  // Hati hati
     val EmissionTypeID: Int,
-    val User: User, // Hati Hati
+    val User: User,                                 // Hati Hati
     val UserID: Int,
     val Amount: Int,
     val CarbonOutput: Double,
 )
+

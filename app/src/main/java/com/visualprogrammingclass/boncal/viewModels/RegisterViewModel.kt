@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.visualprogrammingclass.boncal.models.authentication.RegisterDetail
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
+import com.visualprogrammingclass.boncal.repositories.PreferencesKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,7 +55,7 @@ class RegisterViewModel @Inject constructor(
     // =================
     fun saveUserToken(token:String) = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.saveState(
-            DataStoreRepository.PreferencesKey.userTokenKey,
+            PreferencesKey.userTokenKey,
             token
         )
     }
@@ -76,7 +77,7 @@ class RegisterViewModel @Inject constructor(
     }
     fun saveUserDataAsString(userDataAsString:String) = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.saveState(
-            DataStoreRepository.PreferencesKey.userDataKey,
+            PreferencesKey.userDataKey,
             userDataAsString
         )
     }

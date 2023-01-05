@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
+import com.visualprogrammingclass.boncal.repositories.PreferencesKey
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -36,7 +37,7 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
             var theToken = ""
             repository.readOnBoardingState().collect { completed ->
 
-                repository.readState(DataStoreRepository.PreferencesKey.userTokenKey).collect{ token ->
+                repository.readState(PreferencesKey.userTokenKey).collect{ token ->
                     if(token != emptyPreferences() && (token is String)) {
                         theToken = token.toString()
                         if(!completed.equals(emptyPreferences())){

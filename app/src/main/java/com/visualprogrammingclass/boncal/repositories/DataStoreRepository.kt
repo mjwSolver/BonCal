@@ -12,18 +12,19 @@ import java.io.IOException
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "boncal_preferences")
 
+object PreferencesKey {
+    val generalKey = stringPreferencesKey("settings")
+
+    val onBoardingKey = booleanPreferencesKey("on_boarding_completed")
+    val rememberMeKey = booleanPreferencesKey("remember_me")
+
+    val userTokenKey = stringPreferencesKey("user_token")
+    val userDataKey = stringPreferencesKey("user_data_as_string") // this is json actually
+}
+
 class DataStoreRepository(context: Context) {
     private val dataStore = context.dataStore
 
-    object PreferencesKey {
-        val generalKey = stringPreferencesKey("settings")
-
-        val onBoardingKey = booleanPreferencesKey("on_boarding_completed")
-        val rememberMeKey = booleanPreferencesKey("remember_me")
-
-        val userTokenKey = stringPreferencesKey("user_token")
-        val userDataKey = stringPreferencesKey("user_data_as_string") // this is json actually
-    }
 
     // =================================
     // baseModel

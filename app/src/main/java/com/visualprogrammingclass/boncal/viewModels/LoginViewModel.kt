@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
+import com.visualprogrammingclass.boncal.repositories.PreferencesKey
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -78,7 +79,7 @@ class LoginViewModel @Inject constructor(
     fun saveOnRememberMeState(rememberMe: Boolean) =
         viewModelScope.launch(Dispatchers.IO) {
             dataRepository.savedBooleanState(
-                DataStoreRepository.PreferencesKey.rememberMeKey,
+                PreferencesKey.rememberMeKey,
                 rememberMe
             )
         }
@@ -87,7 +88,7 @@ class LoginViewModel @Inject constructor(
     // =================
     fun saveUserToken(token:String) = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.saveState(
-            DataStoreRepository.PreferencesKey.userTokenKey,
+            PreferencesKey.userTokenKey,
             token
         )
     }
@@ -109,7 +110,7 @@ class LoginViewModel @Inject constructor(
     }
     fun saveUserDataAsString(userDataAsString:String) = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.saveState(
-            DataStoreRepository.PreferencesKey.userDataKey,
+            PreferencesKey.userDataKey,
             userDataAsString
         )
     }

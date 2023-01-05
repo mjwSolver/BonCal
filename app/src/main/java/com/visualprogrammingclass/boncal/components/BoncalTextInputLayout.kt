@@ -47,7 +47,7 @@ fun BoncalTextInputLayout(
     text: String,
     visualTransformation: VisualTransformation = VisualTransformation.None,
 //    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    focusManager: FocusManager,
+    focusManager: FocusManager = LocalFocusManager.current,
     leadIcon: ImageVector = Icons.Default.Email,
     trailingIcon: ImageVector = Icons.Default.Close,
     setText: (String) -> Unit,
