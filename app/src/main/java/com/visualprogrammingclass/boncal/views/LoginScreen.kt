@@ -19,6 +19,7 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,7 +41,6 @@ fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel()
 ){
 
-    val theSuccess: State<Boolean> = loginViewModel.success.observeAsState(false)
     val scrollState = rememberScrollState()
 //    val theTokenName: State<String> = loginViewModel.tokenName.observeAsState("")
 //    val theToken: State<String> = loginViewModel.token.observeAsState("")
@@ -116,6 +116,7 @@ fun LoginScreen(
 
                     loginViewModel.loginThisUser(
                         context,
+                        navController,
                         LoginDetail(email = email, password = password, remember =  checked)
                     )
                     Log.d("login_button", "button pressed")
@@ -123,21 +124,24 @@ fun LoginScreen(
                     Log.d("login_password", password)
 
                     // Need authentication...
-                    val authenticationSucceeded = theSuccess.value
-                    if(authenticationSucceeded){
-                        navController.popBackStack()
-                        navController.navigate(Screen.Main.route)
-                    } else {
-                        Toast.makeText(
-                            context, "Authentication Failed",
-                            Toast.LENGTH_SHORT).show()
-                    }
+
+//                    val authenticationSucceeded = theSuccess.value
+//                    if(authenticationSucceeded){
+//                        navController.popBackStack()
+//                        navController.navigate(Screen.Main.route)
+//                    } else {
+//                        Toast.makeText(
+//                            context, "Authentication Failed",
+//                            Toast.LENGTH_SHORT).show()
+//                    }
                 }
             )
         }
 
     }
 }
+
+//fun confirmAuthentication() = Lifecycle
 
 fun validateEmailAndPassword(email:String, password:String):String {
     return when(true){

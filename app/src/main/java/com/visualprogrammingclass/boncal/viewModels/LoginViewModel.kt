@@ -7,12 +7,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
+import com.visualprogrammingclass.boncal.services.navigations.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +34,7 @@ class LoginViewModel @Inject constructor(
 
     // Login Function
     // =================
-    fun loginThisUser(theContext: Context, loginDetail: LoginDetail) = viewModelScope.launch {
+    fun loginThisUser(theContext: Context, navController: NavController, loginDetail: LoginDetail) = viewModelScope.launch {
 
         endRepository.loginUser(loginDetail).let { loginResponse ->
 //            Log.d("login_response", loginResponse.body()?.message.toString())
@@ -41,14 +44,17 @@ class LoginViewModel @Inject constructor(
                     Toast.makeText(theContext, "Login ${it.message}", Toast.LENGTH_SHORT).show()
                     saveUserToken(it.data.token)
                     saveUserDataWithToken(it.data.token)
-                    _success.postValue(true)
+                    withContext(Dispatchers.Main){
+                        _success.postValue(true)
+                    }
                 }
+                Log.d("loginVM", "Success: ${_success.value}")
+
                 // swap remember me state with just the token
 //                saveOnRememberMeState(loginDetail.remember)
                 // save dulu user from UserData
 
             } else {
-
                 loginResponse.body()?.let {
                     Log.e("login, loginVM", "Login ${it.message}")
                     Toast.makeText(theContext, "Login ${it.message}", Toast.LENGTH_SHORT).show()
@@ -56,6 +62,14 @@ class LoginViewModel @Inject constructor(
                 _success.postValue(false)
             }
 
+        }
+    }.invokeOnCompletion {
+        if(it == null && _success.value == true){
+            navController.popBackStack()
+            navController.navigate(Screen.Main.route)
+//            Toast.makeText(theContext, "Successfully Authenticated", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(theContext, "Authentication Failed", Toast.LENGTH_SHORT).show()
         }
     }
 

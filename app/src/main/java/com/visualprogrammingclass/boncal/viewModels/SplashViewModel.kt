@@ -37,11 +37,11 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
             repository.readOnBoardingState().collect { completed ->
 
                 repository.readState(DataStoreRepository.PreferencesKey.userTokenKey).collect{ token ->
-                    if(!token.equals(emptyPreferences()) && (token is String)) {
-                        theToken = token
+                    if(token != emptyPreferences() && (token is String)) {
+                        theToken = token.toString()
                         if(!completed.equals(emptyPreferences())){
                             onBoard = completed
-                            Log.d("onBoard", "splashVM receives ${onBoard}")
+                            Log.d("onBoard", "splashVM receives $onBoard")
                         } else {
         //                    Log.d("onBoard", "Empty Reference")
                         }

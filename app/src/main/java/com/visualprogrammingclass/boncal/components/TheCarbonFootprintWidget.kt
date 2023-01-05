@@ -35,19 +35,13 @@ import com.visualprogrammingclass.boncal.views.ui.theme.*
 import io.sentry.Span
 
 @Composable
-fun boncalRoundedShape():Shape {
-    return RoundedCornerShape(
-        corner = CornerSize(10.dp)
-    )
-}
-
-@Composable
 fun TheCarbonFootprintWidget(
     onPlusButtonClick: () -> Unit,
     carbonKg: String = "0"
 ) {
     Row(
         modifier = Modifier
+            .clip(boncalRoundedShape())
             .background(foregroundColor())
             .padding(16.dp)
             .fillMaxWidth(),

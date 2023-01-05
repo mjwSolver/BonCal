@@ -20,7 +20,7 @@ fun SetupNavBarGraph(navController: NavHostController, startDestination: String)
         }
         composable(route = NavbarScreen.HomeNB.route){
 //            HomeScreen(navController = navController)
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
         composable(route = NavbarScreenChildren.Category.route){ CategoryScreen(navController) }
         composable(route = NavbarScreenChildren.Calculate.route){ CalculateScreen(navController) }
