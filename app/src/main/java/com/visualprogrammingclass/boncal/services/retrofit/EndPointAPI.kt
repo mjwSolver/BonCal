@@ -1,11 +1,10 @@
 package com.visualprogrammingclass.boncal.services.retrofit
 
 import com.visualprogrammingclass.boncal.models.*
+import com.visualprogrammingclass.boncal.models.article.ArrayListOfArticleResponse
 import com.visualprogrammingclass.boncal.models.authentication.*
 import com.visualprogrammingclass.boncal.models.safetyfirst.CarbonEmissionResponse
 import com.visualprogrammingclass.boncal.models.widgets.ArrayListOfWidgetResponse
-import com.visualprogrammingclass.boncal.models.widgets.WidgetResponse
-import com.visualprogrammingclass.boncal.models.widgets.WidgetResponseItem
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -42,6 +41,15 @@ interface EndPointAPI {
     suspend fun getWidgetData(
         @Header("Authorization") token: String
     ): Response<ArrayListOfWidgetResponse>
+
+
+    // ============
+    // Articles
+    // ============
+
+    @GET("/api/articles")
+    suspend fun getArticles(
+    ): Response<ArrayListOfArticleResponse>
 
     // ============
     // ...

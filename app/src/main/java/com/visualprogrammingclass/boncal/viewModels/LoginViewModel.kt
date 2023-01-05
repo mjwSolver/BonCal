@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.visualprogrammingclass.boncal.helpers.httpCodeResponder
 import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
@@ -27,8 +28,6 @@ class LoginViewModel @Inject constructor(
 
     // Observables
     // =================
-//    private val _name: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-//    val name: LiveData<String> get() = _name
 
     private val _success: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val success: LiveData<Boolean> get() = _success
@@ -38,7 +37,9 @@ class LoginViewModel @Inject constructor(
     fun loginThisUser(theContext: Context, navController: NavController, loginDetail: LoginDetail) = viewModelScope.launch {
 
         endRepository.loginUser(loginDetail).let { loginResponse ->
-//            Log.d("login_response", loginResponse.body()?.message.toString())
+            Log.d("login_response", loginResponse.body()?.message.toString())
+
+//            if (loginResponse.isSuccessful) httpCodeResponder
             if (loginResponse.isSuccessful) {
 
                 loginResponse.body()?.let {
@@ -46,21 +47,21 @@ class LoginViewModel @Inject constructor(
                     saveUserToken(it.data.token)
                     saveUserDataWithToken(it.data.token)
                     withContext(Dispatchers.Main){
-                        _success.postValue(true)
+//                        _success.postValue(true) // doesn't worrrkkkk!!!!!!
+                        _success.value = true
                     }
                 }
                 Log.d("loginVM", "Success: ${_success.value}")
-
-                // swap remember me state with just the token
-//                saveOnRememberMeState(loginDetail.remember)
-                // save dulu user from UserData
 
             } else {
                 loginResponse.body()?.let {
                     Log.e("login, loginVM", "Login ${it.message}")
                     Toast.makeText(theContext, "Login ${it.message}", Toast.LENGTH_SHORT).show()
                 }
-                _success.postValue(false)
+                withContext(Dispatchers.Main){
+                    _success.value = false
+                }
+
             }
 
         }
@@ -71,18 +72,19 @@ class LoginViewModel @Inject constructor(
 //            Toast.makeText(theContext, "Successfully Authenticated", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(theContext, "Authentication Failed", Toast.LENGTH_SHORT).show()
+            it?.printStackTrace()
         }
     }
 
     // Remember Me Function
     // =================
-    fun saveOnRememberMeState(rememberMe: Boolean) =
-        viewModelScope.launch(Dispatchers.IO) {
-            dataRepository.savedBooleanState(
-                PreferencesKey.rememberMeKey,
-                rememberMe
-            )
-        }
+//    fun saveOnRememberMeState(rememberMe: Boolean) =
+//        viewModelScope.launch(Dispatchers.IO) {
+//            dataRepository.savedBooleanState(
+//                PreferencesKey.rememberMeKey,
+//                rememberMe
+//            )
+//        }
 
     // Save User Token Function
     // =================

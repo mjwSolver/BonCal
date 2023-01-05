@@ -21,6 +21,8 @@ class EndPointRepository @Inject constructor(private val api: EndPointAPI) {
     // Getting WidgetData
     suspend fun getWidgetData(token:String) = api.getWidgetData(token = "Bearer $token")
 
+    suspend fun getArticleData() = api.getArticles()
+
     suspend fun getEmissionTypes(token:String) = api.getAvailableEmissionTypes(token = "Bearer $token")
 
     suspend fun sendCarbonEmissionData(

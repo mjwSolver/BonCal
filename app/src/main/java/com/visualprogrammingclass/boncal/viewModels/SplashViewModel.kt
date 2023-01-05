@@ -53,7 +53,7 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
                                 if(onBoard) {
                                 _startDestination.value = Screen.Login.route
                             } else {
-                                _startDestination.value = Screen.Register.route
+                                _startDestination.value = Screen.Welcome.route
                             }
                              _isLoading.value = false
 

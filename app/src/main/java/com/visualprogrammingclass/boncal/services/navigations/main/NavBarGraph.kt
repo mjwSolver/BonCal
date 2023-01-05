@@ -2,6 +2,7 @@ package com.visualprogrammingclass.boncal.services.navigations.main
 
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -11,6 +12,7 @@ import androidx.navigation.navArgument
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.views.*
 
+@OptIn(ExperimentalFoundationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun SetupNavBarGraph(navController: NavHostController, startDestination: String) {
@@ -28,12 +30,14 @@ fun SetupNavBarGraph(navController: NavHostController, startDestination: String)
         composable(
             route = NavbarScreenChildren.Calculate.route,
             arguments = listOf(
-                navArgument("category_id") { type = NavType.IntType },
-                navArgument("rename me") { type = NavType.IntType }
+                navArgument(CALCULATE_REQUIRED_CATEGORY_ID) { type = NavType.IntType },
+                navArgument(CATEGORY_AS_STRING) { type = NavType.StringType}
             )
         ) {
             val calculateId = it.arguments?.getString(CALCULATE_REQUIRED_CATEGORY_ID).toString()
-            CalculateScreen(navController, calculateId)
+            val categoryAsString = it.arguments?.getString(CATEGORY_AS_STRING).toString()
+
+            CalculateScreen(navController, calculateId, categoryAsString)
         }
         composable(
             route = NavbarScreenChildren.WidgetWebView.route,

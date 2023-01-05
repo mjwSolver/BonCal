@@ -1,5 +1,10 @@
 package com.visualprogrammingclass.boncal.models
 
+import com.visualprogrammingclass.boncal.helpers.JsonConvertible
+
+typealias EmissionTypesResponse= ApiResponse<List<SingleAvailableEmissionType>>
+typealias ArrayListOfEmissionTypes= ArrayList<SingleAvailableEmissionType>
+
 data class SingleAvailableEmissionType(
     val BackgroundColor: String,
     val CreatedAt: String,
@@ -15,4 +20,4 @@ data class SingleAvailableEmissionType(
     val Unit: String,
     val UpdatedAt: String,
     val YearReleased: Int
-)
+): JsonConvertible()

@@ -14,6 +14,7 @@ import com.visualprogrammingclass.boncal.repositories.PreferencesKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,7 +37,11 @@ class RegisterViewModel @Inject constructor(
                     Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
                     saveUserToken(it.data.token)
                     saveUserDataWithToken(it.data.token)
-                    _success.value = true
+                    withContext(Dispatchers.Main){
+                        _success.value = true
+//                        _success.postValue(true)
+                    }
+
                     Log.d("regist_success", "${ _success.value }")
                 }
 
@@ -45,11 +50,16 @@ class RegisterViewModel @Inject constructor(
                     Log.e("regist_fail", "Registration ${it.message}")
                     Toast.makeText(context, "Registration ${it.message}", Toast.LENGTH_SHORT).show()
                 }
-                _success.postValue(false)
+                withContext(Dispatchers.Main){
+                    _success.value = false
+//                        _success.postValue(false)
+                }
             }
 
         }
-    }.invokeOnCompletion { Log.d("registerThisUser", "Completed") }
+    }.invokeOnCompletion {
+        Log.d("registerThisUser", "Completed")
+    }
 
     // Save User Token Function
     // =================

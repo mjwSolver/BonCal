@@ -57,7 +57,8 @@ fun LoginScreen(
 
         ){
         // Hold the Alignments here
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.verticalScroll(rememberScrollState())) {
             Image(
                 painter = painterResource(id =
                     if(isSystemInDarkTheme()) MaterialTheme.logo.boncalBlack

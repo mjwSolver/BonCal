@@ -34,13 +34,15 @@ class HomeViewModel @Inject constructor(
             Log.d("HomeVM", "_token when complete is now ${_token.value.toString()}")
         }
         Log.d("HomeVM", "_token fresh is now ${_token.value.toString()}")
+
+        getLatestAirQualityWidgetData()
     }
 
 
     // Air Quality Widget
     // =============
 
-    fun getLatestAirQualityWidgetData(context: Context) = viewModelScope.launch {
+    fun getLatestAirQualityWidgetData() = viewModelScope.launch {
 
             endRepository.getWidgetData(_token.value.toString()).let{ widgetResponse ->
                 Log.d("HomeVM", "Getting Widget data with token: ${_token.value.toString()}")
