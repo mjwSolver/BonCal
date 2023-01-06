@@ -11,6 +11,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -29,10 +30,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.visualprogrammingclass.boncal.R
-import com.visualprogrammingclass.boncal.components.BoncalGradientButton
-import com.visualprogrammingclass.boncal.components.CoilIconImage
-import com.visualprogrammingclass.boncal.components.ImageCard
-import com.visualprogrammingclass.boncal.components.TheCarbonFootprintWidget
+import com.visualprogrammingclass.boncal.components.*
+import com.visualprogrammingclass.boncal.helpers.chrome
 import com.visualprogrammingclass.boncal.models.article.ArrayListOfArticleResponse
 import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
 import com.visualprogrammingclass.boncal.services.navigations.main.NavbarScreen
@@ -48,15 +47,38 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
+    SideEffect {
+        homeViewModel.getArticles().invokeOnCompletion() {
+            Log.d("HomeScreen", "getArticles() completed")
+        }
+//        homeViewModel.getLatestAirQualityWidgetData().invokeOnCompletion() {
+//            Log.d("HomeScreen", "getLatestAirQualityWidgetData() completed")
+//        }
+        homeViewModel.getLatestWidgetData().invokeOnCompletion() {
+            Log.d("HomeScreen", "getLatestWidgetData() completed")
+        }
+
+
+        homeViewModel.saveUserDataWithToken().invokeOnCompletion {
+            Log.d("HomeScreen", "saveUserDataWithToken() completed")
+            homeViewModel.readUserDataAsClass().invokeOnCompletion {
+                Log.d("HomeScreen", "readUserDataAsClass() completed")
+            }
+        }
+    }
 
 //    val data = remember { mutableStateListOf<Dto>() }
 //    LaunchedEffect(key1 = widgetData) {
-    homeViewModel.getLatestAirQualityWidgetData()
+    homeViewModel.getLatestWidgetData()
 //    }
-    val widgetData: State<String?> = homeViewModel.airQualityWidget.observeAsState()
-    Log.d("widgetData", "${widgetData.value}")
+    val allWidgetData: State<List<String>?> = homeViewModel.allWidget.observeAsState(initial = null)
+    val allWidgetUrl: State<List<String>?> = homeViewModel.widgetUrl.observeAsState(initial = null)
 
+    Log.d("allWidgetData", "${allWidgetData.value}")
+
+    val userEmission: State<Double> = homeViewModel.userEmission.observeAsState(initial = 0.0)
     val articles: State<ArrayList<ArticleResponseItem>?> = homeViewModel.articles.observeAsState()
+//    homeViewModel.getArticles()
 
     val scrollState = rememberScrollState()
 
@@ -67,9 +89,11 @@ fun HomeScreen(
 //            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
 
-        Column(modifier = Modifier
-            .verticalScroll(scrollState)
-            .weight(1F, fill = false)){
+        Column(
+            modifier = Modifier
+                .verticalScroll(scrollState)
+                .weight(1F, fill = false)
+        ) {
 
             Spacer(modifier = Modifier.padding(10.dp))
 
@@ -86,13 +110,18 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.padding(10.dp))
 
-            TheCarbonFootprintWidget(onPlusButtonClick = {
-                navController.navigate(NavbarScreenChildren.Category.route)
-            })
+            val floatedValue = (Math.round(userEmission.value * 10.0) / 10.0)
+            TheCarbonFootprintWidget(
+                onPlusButtonClick = {
+                    navController.navigate(NavbarScreenChildren.Category.route)
+                },
+                carbonKg = floatedValue.toString()
+            )
 
             Spacer(modifier = Modifier.padding(12.dp))
 
-            Text(text = "Local Resources",
+            Text(
+                text = "Local Resources",
                 style = TextStyle(
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp,
@@ -106,50 +135,68 @@ fun HomeScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                SubcomposeAsyncImage (
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .placeholder(R.drawable.ic_baseline_visibility_24)
-                        .data(widgetData.value)
-                        .error(R.drawable.ic_baseline_visibility_off_24)
-                        .crossfade( true)
-                        .build(),
-                    contentDescription = "Profile Photo",
-                    contentScale = ContentScale.Crop,
-                    loading = { CircularProgressIndicator(
-                        color = foregroundColor()
-                    ) }
+
+                // Prepare for loop
+
+                LazyRow(
+                    contentPadding = PaddingValues(all = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+
+                    allWidgetData.value?.let { arrayListResponse ->
+                        items(count = arrayListResponse.size) { index ->
+
+//                            CoilIconImage(
+//                                imageUrl = arrayListResponse[index].Url,
+//                                contentDescription = "boncallogoblack",
+//                                title = arrayListResponse[index].Url
+//                            )
+
+                            CoilIconImageClickable(
+                                imageUrl = arrayListResponse[index],
+                                contentDescription = "",
+                                title = "",
+                                onclick = {
+                                    chrome.openTab(context, allWidgetUrl.value?.get(index)!!)
+                                }
+                            )
+
+                        }
+
+                    }
+
+                }
+
+                Spacer(modifier = Modifier.padding(14.dp))
+
+                Text(
+                    text = "Articles",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 24.sp,
+                        fontFamily = Inter
+                    ),
+                    color = foregroundColor(),
                 )
-            }
 
-            BoncalGradientButton(text = "Get Latest Widget Data") {
-                homeViewModel.getLatestAirQualityWidgetData()
-            }
+                Spacer(modifier = Modifier.padding(14.dp))
+                // create a list here
 
-            Spacer(modifier = Modifier.padding(14.dp))
+                LazyRow(
+                    contentPadding = PaddingValues(all = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
 
-            Text(text = "Articles",
-                style = TextStyle(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 24.sp,
-                    fontFamily = Inter
-                ),
-                color = foregroundColor(),
-            )
+                    articles.value?.let { arrayListResponse ->
+                        items(count = arrayListResponse.size) { index ->
 
-            Spacer(modifier = Modifier.padding(14.dp))
-            // create a list here
+                            CoilIconImage(
+                                imageUrl = arrayListResponse[index].Url,
+                                contentDescription = "boncallogoblack",
+                                title = arrayListResponse[index].Url
+                            )
+                        }
 
-            LazyRow(
-                contentPadding = PaddingValues(all = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-
-                articles.value?.let { arrayListResponse ->
-                    items(count = arrayListResponse.size) { index ->
-
-                        CoilIconImage(imageUrl = arrayListResponse[index].Url
-                            ,contentDescription = "boncallogoblack", title = arrayListResponse[index].Url
-                        )
                     }
 
                 }
@@ -157,12 +204,11 @@ fun HomeScreen(
             }
 
         }
-
     }
 }
 
 @Composable
 @Preview
-fun HomeScreenPreview(){
+fun HomeScreenPreview() {
     HomeScreen(navController = rememberNavController())
 }

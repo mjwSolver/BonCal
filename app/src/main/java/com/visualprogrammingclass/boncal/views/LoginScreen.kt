@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,6 +32,7 @@ import com.visualprogrammingclass.boncal.models.authentication.LoginDetail
 import com.visualprogrammingclass.boncal.services.navigations.Screen
 import com.visualprogrammingclass.boncal.viewModels.LoginViewModel
 import com.visualprogrammingclass.boncal.views.ui.theme.BonCalTheme
+import com.visualprogrammingclass.boncal.views.ui.theme.foregroundColor
 import com.visualprogrammingclass.boncal.views.ui.theme.logo
 
 @Composable
@@ -89,18 +91,19 @@ fun LoginScreen(
 
             // Not yet configured
             val (checked, setChecked) = rememberSaveable { mutableStateOf(false) }
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                BoncalCheckBox(checked, setChecked); Text(text = "Remember Me")
-            }
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                BoncalCheckBox(checked, setChecked); Text(text = "Remember Me")
+//            }
 
             ClickableText(
                 text = AnnotatedString("Register a New Account"),
                 onClick = {
                     navController.popBackStack()
                     navController.navigate(Screen.Register.route)
-                }
+                },
+                style = TextStyle(color = foregroundColor())
             )
 
             BoncalGradientButton(
@@ -118,7 +121,7 @@ fun LoginScreen(
                     loginViewModel.loginThisUser(
                         context,
                         navController,
-                        LoginDetail(email = email, password = password, remember =  checked)
+                        LoginDetail(email = email.trimEnd(), password = password.trimEnd(), remember =  checked)
                     )
                     Log.d("login_button", "button pressed")
                     Log.d("login_email", email)

@@ -1,7 +1,9 @@
 package com.visualprogrammingclass.boncal.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets.Side
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -13,7 +15,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -41,18 +45,30 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        installSplashScreen().setKeepOnScreenCondition {
-            !splashViewModel.isLoading.value
-        }
+
+//        installSplashScreen().setKeepOnScreenCondition {
+//            !splashViewModel.isLoading.value
+//        }
 
         setContent {
 
             BonCalTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
+
+
+//                    WindowCompat.setDecorFitsSystemWindows(window, false)
+//                    window.setFlags(
+//                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+//                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+//                    )
+
                     modifier = Modifier.fillMaxSize(),
                     color = UseColor(Slate900, Slate50)
                 ) {
+
+                    Log.d("MainActivity", "onCreate: ${splashViewModel.isLoading.value}")
 
                     val systemUiController = rememberSystemUiController()
                     val darkTheme = isSystemInDarkTheme()

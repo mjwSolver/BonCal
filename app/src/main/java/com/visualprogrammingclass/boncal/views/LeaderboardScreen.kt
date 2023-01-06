@@ -31,6 +31,7 @@ fun LeaderboardScreen(
 ){
 
     val theToken: State<String?> = leaderBoardViewModel.token.observeAsState()
+    leaderBoardViewModel.getUserToken()
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -44,14 +45,11 @@ fun LeaderboardScreen(
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("GFG | WebView", color = Color.White) },
+        topBar = { TopAppBar(title = { Text("BonCal", color = Color.White) },
             backgroundColor = Slate900
         ) },
         content = {
-
-            theToken.let {
-                LeaderboardContent(it.value.toString())
-            }
+            LeaderboardContent(theToken.value.toString())
         }
     )
 

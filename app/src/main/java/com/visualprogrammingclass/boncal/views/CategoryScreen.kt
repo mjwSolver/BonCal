@@ -1,6 +1,7 @@
 package com.visualprogrammingclass.boncal.views
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.view.WindowManager
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +30,7 @@ import com.visualprogrammingclass.boncal.viewModels.CategoryViewModel
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.visualprogrammingclass.boncal.R
@@ -124,31 +126,39 @@ fun CategoryScreen(
                                         )
                                     )
                                 }
-                                )
+                                ),
+                            contentAlignment = Alignment.CenterStart,
                         ) {
 
-                            SubcomposeAsyncImage (
-                                model = ImageRequest.Builder(LocalContext.current)
-                                    .placeholder(R.drawable.ic_baseline_visibility_24)
-                                    .data(it[i].Icon)
-                                    .error(R.drawable.ic_baseline_visibility_off_24)
-                                    .crossfade( true)
-                                    .build(),
-                                contentDescription = "Icons",
-                                contentScale = ContentScale.Crop,
-                                loading = { CircularProgressIndicator(
-                                    color = foregroundColor()
-                                ) }
-                            )
+                            Column(
+                                horizontalAlignment = Alignment.Start,
+                                verticalArrangement = Arrangement.SpaceBetween,
 
-                            Text(text = it[i].Name, style = TextStyle(
-                                color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
+                            ){
+                                SubcomposeAsyncImage (
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .placeholder(R.drawable.ic_baseline_visibility_24)
+                                        .data(it[i].Icon)
+                                        .error(R.drawable.ic_baseline_visibility_off_24)
+                                        .crossfade( true)
+                                        .build(),
+                                    contentDescription = "Icons",
+                                    contentScale = ContentScale.Crop,
+                                    loading = { CircularProgressIndicator(
+                                        color = foregroundColor()
+                                    ) }
+                                )
+
+                                Text(text = it[i].Name, style = TextStyle(
+                                    color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
 //                                color = Color(it[0].ForegroundColor.toLong())
-                            ))
-                            Text(text = "(${it[i].Unit})", style = TextStyle(
-                                color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
+                                ))
+                                Text(text = "(${it[i].Unit})", style = TextStyle(
+                                    color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
 //                                color = Color(it[0].ForegroundColor.toLong())
-                            ))
+                                ))
+                            }
+
                         }
 
                     }

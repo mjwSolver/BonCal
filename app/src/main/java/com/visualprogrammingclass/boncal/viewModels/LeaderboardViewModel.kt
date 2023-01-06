@@ -25,6 +25,10 @@ class LeaderboardViewModel @Inject constructor(
     private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val token: LiveData<String> get() = _token
 
+    init {
+        getUserToken()
+    }
+
     fun getUserToken() = viewModelScope.launch(Dispatchers.IO) {
         dataRepository.readState(PreferencesKey.userTokenKey).cancellable().collect{ token->
 
@@ -35,7 +39,7 @@ class LeaderboardViewModel @Inject constructor(
                 // this works
                 withContext(Dispatchers.Main){
                     _token.value = token.toString()
-                    Log.d("HomeVM", "_token.value is ${_token.value.toString()}")
+                    Log.d("LeaderVM", "_token.value is ${_token.value.toString()}")
                 }
 
             }

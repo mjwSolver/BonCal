@@ -66,11 +66,13 @@ fun BoncalTextInputLayout(
             text = label,
             color = foregroundColor()
         )},
-        placeholder = { Text(text = label)},
+        placeholder = { Text( text = label,color = foregroundColor()) },
 
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = foregroundColor(),
-            backgroundColor = backgroundColor()
+            backgroundColor = backgroundColor(),
+            textColor = foregroundColor(),
+            cursorColor = Blue400
         ),
 
         leadingIcon = { Icon(
@@ -128,7 +130,7 @@ fun BoncalPasswordTextInputLayout(
 
         value = password, onValueChange = setPassword,
 
-        placeholder = { Text(text = label) },
+        placeholder = { Text( text = label,color = foregroundColor()) },
         label = { Text( text = label,color = foregroundColor()) },
 
         visualTransformation = if(passwordVisibility) VisualTransformation.None
@@ -144,6 +146,8 @@ fun BoncalPasswordTextInputLayout(
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = foregroundColor(),
             backgroundColor = backgroundColor(),
+            textColor = foregroundColor(),
+            cursorColor = Blue600
         ),
 
         leadingIcon = {

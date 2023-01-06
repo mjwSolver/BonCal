@@ -33,38 +33,41 @@ class SplashViewModel @Inject constructor(repository: DataStoreRepository): View
         // It's working but it's terrible
         viewModelScope.launch {
 
+            _startDestination.value = Screen.Welcome.route
+            _isLoading.value = false
+
             var onBoard = false;
             var theToken = ""
-            repository.readOnBoardingState().collect { completed ->
-
-                repository.readState(PreferencesKey.userTokenKey).collect{ token ->
-                    if(token != emptyPreferences() && (token is String)) {
-                        theToken = token.toString()
-                        if(!completed.equals(emptyPreferences())){
-                            onBoard = completed
-                            Log.d("onBoard", "splashVM receives $onBoard")
-                        } else {
-        //                    Log.d("onBoard", "Empty Reference")
-                        }
-
-                            if(onBoard && theToken.isNotEmpty()){
-                                _startDestination.value = Screen.Main.route
-                            } else
-                                if(onBoard) {
-                                _startDestination.value = Screen.Login.route
-                            } else {
-                                _startDestination.value = Screen.Welcome.route
-                            }
-                             _isLoading.value = false
-
-                        Log.d("theToken",  "splashVM receives $theToken")
-//                    } else {
-//                         theToken = ""
-//                        Log.d("theToken", "Empty Reference")
-                    }
-                }
-
-            }
+//            repository.readOnBoardingState().collect { completed ->
+//
+//                repository.readState(PreferencesKey.userTokenKey).collect{ token ->
+//                    if(token != emptyPreferences() && (token is String)) {
+//                        theToken = token.toString()
+//                        if(!completed.equals(emptyPreferences())){
+//                            onBoard = completed
+//                            Log.d("onBoard", "splashVM receives $onBoard")
+//                        } else {
+//        //                    Log.d("onBoard", "Empty Reference")
+//                        }
+//
+//                            if(onBoard && theToken.isNotEmpty()){
+//                                _startDestination.value = Screen.Main.route
+//                            } else
+//                                if(onBoard) {
+//                                _startDestination.value = Screen.Login.route
+//                            } else {
+//                                _startDestination.value = Screen.Welcome.route
+//                            }
+//                             _isLoading.value = false
+//
+//                        Log.d("theToken",  "splashVM receives $theToken")
+////                    } else {
+////                         theToken = ""
+////                        Log.d("theToken", "Empty Reference")
+//                    }
+//                }
+//
+//            }
         }
 
     }

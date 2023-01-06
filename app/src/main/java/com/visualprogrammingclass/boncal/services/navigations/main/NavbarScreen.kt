@@ -2,6 +2,7 @@ package com.visualprogrammingclass.boncal.services.navigations.main
 
 import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.models.SingleAvailableEmissionType
+import java.net.URLEncoder
 
 
 sealed class NavbarScreen(
@@ -23,11 +24,16 @@ sealed class NavbarScreen(
 }
 
 const val CALCULATE_REQUIRED_CATEGORY_ID = "category_id"
+//const val CATEGORY_UNIT = "category_unit"                   // like KwH
+//const val CATEGORY_DESCRIPTION = "category_description"     // like ?
+//const val CATEGORY_METRIC = "category_metric"               // like 0.16
 const val CATEGORY_AS_STRING = "category_class"
+
 
 sealed class NavbarScreenChildren(
     val route: String
 ){
+
     object Category: NavbarScreenChildren("category_screen")
     object Calculate: NavbarScreenChildren("calculate_screen/{$CALCULATE_REQUIRED_CATEGORY_ID}/{$CATEGORY_AS_STRING}"){
         fun passIdAndClass(id:Int, json: String):String{
@@ -36,7 +42,7 @@ sealed class NavbarScreenChildren(
                 newValue = id.toString()
             ).replace(
                 oldValue = "{$CATEGORY_AS_STRING}",
-                newValue = json
+                newValue = URLEncoder.encode(json, "utf-8")
             )
         }
     }

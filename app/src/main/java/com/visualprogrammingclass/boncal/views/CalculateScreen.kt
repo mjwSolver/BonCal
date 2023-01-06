@@ -149,7 +149,7 @@ fun CalculateScreen(
             if(emission.toIntOrNull() is Int){
                 val carbonEmissionDetail = CarbonEmissionDetail(
                     amount = emission.toInt(),
-                    emission_id = calculateId.toInt(),
+                    emission_id = unwrappedCategory.ID
                 )
 
                 calculateViewModel.sendingCarbonEmissionData(
