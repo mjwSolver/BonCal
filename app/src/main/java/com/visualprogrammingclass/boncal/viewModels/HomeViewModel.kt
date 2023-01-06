@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
     private val _airQualityWidget: MutableLiveData<String> by lazy { MutableLiveData<String>("") }
     val airQualityWidget: LiveData<String> get()=_airQualityWidget
 
-    private val _articles: MutableLiveData<ArrayList<ArticleResponseItem>?> by lazy { MutableLiveData<ArrayList<ArticleResponseItem>?>("") }
+    private val _articles: MutableLiveData<ArrayList<ArticleResponseItem>?> by lazy { MutableLiveData<ArrayList<ArticleResponseItem>?>() }
     val articles: LiveData<ArrayList<ArticleResponseItem>?> get()=_articles
 
     init{

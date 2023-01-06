@@ -46,11 +46,12 @@ class CategoryViewModel @Inject constructor(
                 listOfEmissionResponse.body()?.let { listOfEmissionTypes ->
                     withContext(Dispatchers.Main) {
                         _list.value = listOfEmissionTypes.data
+                        Log.d("CategoryVM", "_list.value returns ${listOfEmissionTypes.data}")
                     }
                 }
 
             } else {
-                Log.e("CategoryVM", "Failed to get Category Information")
+                Log.e("CategoryVM", "Failed to get _list.value Information")
             }
         }
     }

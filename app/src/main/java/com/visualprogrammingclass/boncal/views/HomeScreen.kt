@@ -144,11 +144,12 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
-                articles.value?.let {
-                    items(count = it.size) { article ->
+                articles.value?.let { arrayListResponse ->
+                    items(count = arrayListResponse.size) { index ->
 
-                        CoilIconImage(imageUrl = article.
-                            ,contentDescription = "boncallogoblack", title = "${article.title}")
+                        CoilIconImage(imageUrl = arrayListResponse[index].Url
+                            ,contentDescription = "boncallogoblack", title = arrayListResponse[index].Url
+                        )
                     }
 
                 }
