@@ -41,10 +41,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var splashViewModel: SplashViewModel
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        this@MainActivity.actionBar?.hide()
 
 //        installSplashScreen().setKeepOnScreenCondition {
 //            !splashViewModel.isLoading.value
@@ -56,13 +55,6 @@ class MainActivity : ComponentActivity() {
 
                 // A surface container using the 'background' color from the theme
                 Surface(
-
-
-//                    WindowCompat.setDecorFitsSystemWindows(window, false)
-//                    window.setFlags(
-//                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-//                    )
 
                     modifier = Modifier.fillMaxSize(),
                     color = UseColor(Slate900, Slate50)
