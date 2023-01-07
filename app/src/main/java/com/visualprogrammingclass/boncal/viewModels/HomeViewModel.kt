@@ -1,27 +1,21 @@
 package com.visualprogrammingclass.boncal.viewModels
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.JsonConvertible.Companion.fromJson
-import com.visualprogrammingclass.boncal.helpers.statics
-import com.visualprogrammingclass.boncal.models.article.ArrayListOfArticleResponse
 import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
 import com.visualprogrammingclass.boncal.models.authentication.User
+import com.visualprogrammingclass.boncal.models.widgets.WidgetResponseItem
 import com.visualprogrammingclass.boncal.repositories.DataStoreRepository
 import com.visualprogrammingclass.boncal.repositories.EndPointRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
-import com.visualprogrammingclass.boncal.models.widgets.WidgetResponse
 import com.visualprogrammingclass.boncal.repositories.PreferencesKey
 
 @HiltViewModel
@@ -34,11 +28,14 @@ class HomeViewModel @Inject constructor(
 //    private val _airQualityWidget: MutableLiveData<String> by lazy { MutableLiveData<String>("") }
 //    val airQualityWidget: LiveData<String> get()=_airQualityWidget
 
-    private val _allWidget: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
-    val allWidget: LiveData<List<String>> get() = _allWidget
+//    private val _widgetImage: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
+//    val widgetImage: LiveData<List<String>> get() = _widgetImage
 
-    private val _widgetUrl: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
-    val widgetUrl: LiveData<List<String>> get() = _widgetUrl
+//    private val _widgetUrl: MutableLiveData<List<String>> by lazy { MutableLiveData<List<String>>() }
+//    val widgetUrl: LiveData<List<String>> get() = _widgetUrl
+
+    private val _widgets: MutableLiveData<ArrayList<WidgetResponseItem>> by lazy { MutableLiveData<ArrayList<WidgetResponseItem>>() }
+    val widgets: LiveData<ArrayList<WidgetResponseItem>> get() = _widgets
 
     private val _articles: MutableLiveData<ArrayList<ArticleResponseItem>?> by lazy { MutableLiveData<ArrayList<ArticleResponseItem>?>() }
     val articles: LiveData<ArrayList<ArticleResponseItem>?> get() = _articles
@@ -77,30 +74,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
-    // Air Quality Widget
-    // =============
-
-//    fun getLatestAirQualityWidgetData() = viewModelScope.launch {
-//
-//        endRepository.getWidgetData(_token.value.toString()).let{ widgetResponse ->
-//            Log.d("HomeVM", "Getting Widget data with token: ${_token.value.toString()}")
-//            if(widgetResponse.isSuccessful) {
-//                widgetResponse.body()?.let { widgetContent ->
-//
-//                    withContext(Dispatchers.Main){
-//                        _airQualityWidget.postValue(widgetContent.data[0].image)
-//                        Log.d("Widget", widgetContent.data[0].image)
-//                    }
-//                }
-//
-//            } else {
-//                Log.d("Widget", "Data Retrieval Failed")
-//
-//            }
-//        }
-//    }
-
     fun getLatestWidgetData() = viewModelScope.launch {
 
         endRepository.getWidgetData(_token.value.toString()).let { widgetResponse ->
@@ -109,14 +82,13 @@ class HomeViewModel @Inject constructor(
                 widgetResponse.body()?.let { widgetContent ->
 
                     withContext(Dispatchers.Main) {
-                        _allWidget.postValue(widgetContent.data.map { it.image })
-                        _widgetUrl.postValue(widgetContent.data.map { it.data })
+                        _widgets.postValue(widgetContent.data)
                         Log.d("Widget", widgetContent.data.map { it.image }.toString())
                     }
                 }
 
             } else {
-                Log.d("Widget", "Data Retrieval Failed")
+                Log.d("Widget", "Failed to retrieve all Widget Data")
 
             }
         }

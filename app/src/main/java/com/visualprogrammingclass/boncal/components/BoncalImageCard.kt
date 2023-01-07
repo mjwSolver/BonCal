@@ -1,10 +1,11 @@
 package com.visualprogrammingclass.boncal.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -16,13 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.visualprogrammingclass.boncal.R
+import com.visualprogrammingclass.boncal.helpers.chrome
 import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.views.ui.theme.foregroundColor
 
@@ -73,123 +74,99 @@ fun ImageCard(
 }
 
 // Status: Final
-// Designed for: Articles
+// Designed for: Widget
 
 @Composable
-fun CoilIconImage(
+fun WidgetIconClickable(
     imageUrl: String,
-    contentDescription: String,
-    title: String,
+    linkUrl: String,
     modifier: Modifier = Modifier
 ) {
+
+    val currentContext = LocalContext.current
+
     Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = 5.dp
     ) {
-        Box(modifier = Modifier.height(200.dp))
-        {
 
-        }
-            SubcomposeAsyncImage (
-                model = ImageRequest.Builder(LocalContext.current)
-                    .placeholder(R.drawable.ic_baseline_visibility_24)
-                    .data(imageUrl)
-                    .error(R.drawable.ic_baseline_visibility_off_24)
-                    .crossfade( true)
-                    .build(),
-                contentDescription = "Profile Photo",
-                contentScale = ContentScale.Crop,
-                loading = { CircularProgressIndicator(
-                    color = foregroundColor()
-                ) }
+        CoilSubComposeAsyncImage(link = imageUrl)
+
+        Box(
+            modifier = Modifier
+                .size(90.dp, 80.dp)
+                .clickable {
+                    chrome.openTab(currentContext, linkUrl)
+                    Log.d("BoncalImageCard", "Widget Box Pressed")
+                }
             )
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black
-                            ),
-                            startY = 300f
-                        )
-                    )
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomStart
-                ) {
-                    Text(title, style = TextStyle(color = Slate50, fontSize = 16.sp))
-                }
-            }
         }
     }
 
 // Status: Not Final
 // Designed for: Articles
 @Composable
-fun CoilIconImageClickable(
+fun ArticleItemClickable(
     imageUrl: String,
-    contentDescription: String,
     title: String,
-    onclick: () -> Unit = {},
+    linkUrl:String,
     modifier: Modifier = Modifier
 ) {
+
+    val currentContext = LocalContext.current
+
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(15.dp),
         elevation = 5.dp
     ) {
-        Box(modifier = Modifier.height(200.dp))
-        {
-
-            ClickableText(
-                text = AnnotatedString(imageUrl),
-                onClick = {
-                    onclick()
-                }
-            )
-        }
-        SubcomposeAsyncImage (
-            model = ImageRequest.Builder(LocalContext.current)
-                .placeholder(R.drawable.ic_baseline_visibility_24)
-                .data(imageUrl)
-                .error(R.drawable.ic_baseline_visibility_off_24)
-                .crossfade( true)
-                .build(),
-            contentDescription = "Profile Photo",
-            contentScale = ContentScale.Crop,
-            loading = { CircularProgressIndicator(
-                color = foregroundColor()
-            ) }
-        )
 
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        ),
-                        startY = 300f
-                    )
-                )
+            modifier = Modifier.size(200.dp, 120.dp), // x , y
+
         ) {
+
+            CoilSubComposeAsyncImage(link = imageUrl)
+
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(12.dp),
+                    .padding(15.dp),
                 contentAlignment = Alignment.BottomStart
             ) {
-                Text(title, style = TextStyle(color = Slate50, fontSize = 16.sp))
+
+                BoncalClickableText(
+                    title = title,
+                    onClick = {
+                        chrome.openTab(currentContext, linkUrl)
+                    })
             }
+
+            Box(
+                modifier = Modifier
+                    .size(90.dp, 80.dp)
+                    .clickable {
+                        chrome.openTab(currentContext, linkUrl)
+                        Log.d("BoncalImageCard", "Article Box Pressed")
+                    }
+            )
         }
     }
+}
+
+@Composable
+fun CoilSubComposeAsyncImage(link:String){
+    SubcomposeAsyncImage (
+        model = ImageRequest.Builder(LocalContext.current)
+            .placeholder(R.drawable.ic_baseline_visibility_24)
+            .data(link)
+            .error(R.drawable.ic_baseline_visibility_off_24)
+            .crossfade( true)
+            .build(),
+        contentDescription = "Profile Photo",
+        contentScale = ContentScale.Crop,
+        loading = { CircularProgressIndicator(
+            color = foregroundColor()
+        ) }
+    )
 }

@@ -98,7 +98,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
     //Font Dependency
-    implementation "androidx.compose.ui:ui-text-google-fonts:1.3.2"
+    implementation "androidx.compose.ui:ui-text-google-fonts:1.3.0"
 
     // LiveData - compose Dependency
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"

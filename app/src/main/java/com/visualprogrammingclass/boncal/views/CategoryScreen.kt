@@ -104,6 +104,7 @@ fun CategoryScreen(
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
+            modifier = Modifier.padding(10.dp),
             content = {
                 theList.value?.let {
                     items(it.size) { i ->
@@ -114,9 +115,14 @@ fun CategoryScreen(
                         Box(
                             modifier = Modifier
                                 .aspectRatio(1F)
+                                .size(100.dp)
                                 .background(
-                                    color = Color(android.graphics.Color.parseColor("#${ it[i].BackgroundColor.takeLast(6) }"))
+                                    color = Color(
+                                        android.graphics.Color
+                                            .parseColor("#${it[i].BackgroundColor.takeLast(6) }")
+                                    )
                                 )
+                                .clip(boncalRoundedShape())
                                 .padding(4.dp)
                                 .clickable(onClick = {
                                     navController.navigate(
@@ -125,8 +131,7 @@ fun CategoryScreen(
                                             categoryAsString
                                         )
                                     )
-                                }
-                                ),
+                                }),
                             contentAlignment = Alignment.CenterStart,
                         ) {
 
@@ -148,6 +153,7 @@ fun CategoryScreen(
                                         color = foregroundColor()
                                     ) }
                                 )
+
 
                                 Text(text = it[i].Name, style = TextStyle(
                                     color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))

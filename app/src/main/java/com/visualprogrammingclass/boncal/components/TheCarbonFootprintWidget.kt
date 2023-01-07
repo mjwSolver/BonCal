@@ -54,12 +54,12 @@ fun TheCarbonFootprintWidget(
                 .size(90.dp)
                 .clip(boncalRoundedShape())
                 .background(Teal500)
-                .padding(18.dp),
+                .padding(10.dp),
             contentAlignment = Alignment.Center,
         ){
 
             Box(
-                modifier = Modifier.size(50.dp, 50.dp),
+                modifier = Modifier.size(40.dp, 40.dp),
                 contentAlignment = Alignment.Center
             ){
                 Image(
@@ -78,7 +78,7 @@ fun TheCarbonFootprintWidget(
                 .height(90.dp)
                 .clip(boncalRoundedShape())
                 .background(Blue200)
-                .padding(18.dp)
+                .padding(start = 10.dp, end = 10.dp, top = 16.dp, bottom = 4.dp)
         ){
 
             Column(

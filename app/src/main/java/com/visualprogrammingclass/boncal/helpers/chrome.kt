@@ -39,7 +39,7 @@ object chrome {
         builder.setInstantAppsEnabled(true)
 
         // on below line we are setting tool bar color for our custom chrome tabs.
-        builder.setToolbarColor(ContextCompat.getColor(context, R.color.teal_200))
+        builder.setToolbarColor(ContextCompat.getColor(context, R.color.blue600))
 
         // on below line we are creating a
         // variable to build our builder.

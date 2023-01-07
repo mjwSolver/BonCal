@@ -112,17 +112,17 @@ fun LoginScreen(
                 text = "Login",
                 onClick = {
 
-                    val validationResult = validateEmailAndPassword(email = email, password = password)
-                    if(validationResult.isNotEmpty()){
-                        Toast.makeText(context, "Please fill in $validationResult Field", Toast.LENGTH_SHORT).show()
-                        return@BoncalGradientButton
-                    }
+//                    val validationResult = validateEmailAndPassword(email = email, password = password)
+//                    if(validationResult.isNotEmpty()){
+//                        Toast.makeText(context, "Please fill in $validationResult Field", Toast.LENGTH_SHORT).show()
+//                        return@BoncalGradientButton
+//                    }
 
-                    loginViewModel.loginThisUser(
-                        context,
-                        navController,
-                        LoginDetail(email = email.trimEnd(), password = password.trimEnd(), remember =  checked)
-                    )
+//                    loginViewModel.loginThisUser(
+//                        context,
+//                        navController,
+//                        LoginDetail(email = email.trimEnd(), password = password.trimEnd(), remember =  checked)
+//                    )
                     Log.d("login_button", "button pressed")
                     Log.d("login_email", email)
                     Log.d("login_password", password)
@@ -131,8 +131,8 @@ fun LoginScreen(
 
 //                    val authenticationSucceeded = theSuccess.value
 //                    if(authenticationSucceeded){
-//                        navController.popBackStack()
-//                        navController.navigate(Screen.Main.route)
+                        navController.popBackStack()
+                        navController.navigate(Screen.Main.route)
 //                    } else {
 //                        Toast.makeText(
 //                            context, "Authentication Failed",
