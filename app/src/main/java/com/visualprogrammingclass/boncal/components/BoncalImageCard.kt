@@ -26,6 +26,7 @@ import com.visualprogrammingclass.boncal.R
 import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.views.ui.theme.foregroundColor
 
+// Base Copy-paste version
 @Composable
 fun ImageCard(
     painter: Painter,
@@ -70,6 +71,9 @@ fun ImageCard(
         }
     }
 }
+
+// Status: Final
+// Designed for: Articles
 
 @Composable
 fun CoilIconImage(
@@ -126,9 +130,10 @@ fun CoilIconImage(
         }
     }
 
+// Status: Not Final
+// Designed for: Articles
 @Composable
 fun CoilIconImageClickable(
-
     imageUrl: String,
     contentDescription: String,
     title: String,

@@ -34,7 +34,7 @@ class LeaderboardViewModel @Inject constructor(
 
             if(token == emptyPreferences()) { return@collect }
             if(token !is String) { return@collect }
-            if(token.isNotEmpty()){
+            if(token.toString().isNotEmpty()){
 
                 // this works
                 withContext(Dispatchers.Main){
