@@ -86,6 +86,9 @@ fun HomeScreen(
 
     val scrollState = rememberScrollState()
 
+    Box(
+        modifier = Modifier.padding(bottom = 60.dp)
+    ){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -279,6 +282,7 @@ fun HomeScreen(
 //        } // item
 
     } // column
+}
 }
 
 @Composable
