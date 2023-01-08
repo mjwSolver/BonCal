@@ -173,7 +173,7 @@ fun ReforestationItemClickable(
 
         Box(
             modifier = Modifier
-                .background(FadedBoncalGradient)
+                .background(fadedBoncalGradient())
 //                .background(Teal300)
                 .size(200.dp, 90.dp), // x , y
             contentAlignment = Alignment.Center,
