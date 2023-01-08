@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateOffsetAsState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -13,7 +14,12 @@ import com.visualprogrammingclass.boncal.views.ui.theme.Slate50
 import com.visualprogrammingclass.boncal.views.ui.theme.Slate900
 
 @Composable
-fun BoncalClickableText(title:String, onClick: ()->Any){
+fun BoncalClickableText(
+    title:String,
+    textColor: Color = Slate50,
+    shadowColor: Color = Color.Transparent,
+    onClick: ()->Any
+){
 
     val offset = Offset(2.0f, 3.0f)
     ClickableText(
@@ -22,9 +28,9 @@ fun BoncalClickableText(title:String, onClick: ()->Any){
             onClick
         },
         style = TextStyle(
-            color = Slate50, fontSize = 16.sp,
+            color = textColor, fontSize = 16.sp,
             shadow = Shadow(
-                color = Slate900,
+                color = shadowColor,
                 offset = offset)
             )
         )

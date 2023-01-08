@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -131,28 +133,46 @@ fun ArticleItemClickable(
 
             Box(
                 modifier = Modifier
+                    .background(
+                        Brush.verticalGradient(
+                            colors =
+                                listOf(Color.Transparent, Slate900),
+//                            if (isSystemInDarkTheme()) {
+//                                listOf(Color.Transparent, Slate50)
+//                            } else {
+//                                listOf(Color.Transparent, Slate900)
+//                            },
+                            startY = 1f
+                        )
+                    )
                     .padding(15.dp),
                 contentAlignment = Alignment.BottomStart
             ) {
-
                 BoncalClickableText(
                     title = title,
+//                    textColor = backgroundColor(),
+//                    shadowColor = foregroundColor(),
+                    textColor = Slate50,
+                    shadowColor = Slate900,
                     onClick = {
                         chrome.openTab(currentContext, linkUrl)
                     })
             }
 
-            Box(
-                modifier = Modifier
-                    .size(90.dp, 80.dp)
-                    .clickable {
-                        chrome.openTab(currentContext, linkUrl)
-                        Log.d("BoncalImageCard", "Article Box Pressed")
-                    }
+            Box(modifier = Modifier
+                .size(90.dp, 80.dp)
+                .clickable {
+                    chrome.openTab(currentContext, linkUrl)
+                    Log.d("BoncalImageCard", "Article Box Pressed")
+                }
             )
+
         }
     }
 }
+
+// Status: Final
+// Designed for: Reforestation
 
 @Composable
 fun ReforestationItemClickable(
@@ -166,7 +186,7 @@ fun ReforestationItemClickable(
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(16.dp),
         elevation = 5.dp,
 //        backgroundColor = Rose300
     ) {
@@ -199,7 +219,7 @@ fun ReforestationItemClickable(
                 }
 
                 Spacer(modifier = Modifier.padding(4.dp))
-                
+
                 Column(
                     modifier = Modifier
 //                        .background(Orange700)
