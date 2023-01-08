@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.visualprogrammingclass.boncal.helpers.JsonConvertible.Companion.fromJson
+import com.visualprogrammingclass.boncal.models.ReforestationFundsItem
 import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
 import com.visualprogrammingclass.boncal.models.authentication.User
 import com.visualprogrammingclass.boncal.models.widgets.WidgetResponseItem
@@ -24,7 +26,7 @@ class HomeViewModel @Inject constructor(
     private val dataRepository: DataStoreRepository
 ) : ViewModel() {
 
-    private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    private val _token: MutableLiveData<String> by lazy { MutableLiveData<String>("nJulRNKdtWGBDXUJvZzftCtucBvXjCtXTAvYDebs") }
 //    private val _airQualityWidget: MutableLiveData<String> by lazy { MutableLiveData<String>("") }
 //    val airQualityWidget: LiveData<String> get()=_airQualityWidget
 
@@ -39,6 +41,9 @@ class HomeViewModel @Inject constructor(
 
     private val _articles: MutableLiveData<ArrayList<ArticleResponseItem>?> by lazy { MutableLiveData<ArrayList<ArticleResponseItem>?>() }
     val articles: LiveData<ArrayList<ArticleResponseItem>?> get() = _articles
+
+    private val _reforestation: MutableLiveData<ArrayList<ReforestationFundsItem>> by lazy { MutableLiveData<ArrayList<ReforestationFundsItem>>() }
+    val reforestation: LiveData<ArrayList<ReforestationFundsItem>?> get() = _reforestation
 
     private val _userEmission: MutableLiveData<Double> by lazy { MutableLiveData<Double>() }
     val userEmission: LiveData<Double> get() = _userEmission
@@ -94,6 +99,20 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getLatestReforestationProgram() = viewModelScope.launch {
+        endRepository.getReforestationPrograms().let { reforestationResponse ->
+            if (reforestationResponse.isSuccessful) {
+                reforestationResponse.body()?.let { reforestationPrograms ->
+                    withContext(Dispatchers.Main) {
+                        _reforestation.postValue(reforestationPrograms.data)
+                    }
+                }
+            } else {
+                Log.d("HomeVM", "Failed to retrieve reforestation programs")
+            }
+        }
+
+    }
 
     // Getting User Token
     // ===================

@@ -13,8 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.key
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -28,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import com.visualprogrammingclass.boncal.components.*
 import com.visualprogrammingclass.boncal.helpers.chrome
+import com.visualprogrammingclass.boncal.models.ReforestationFundsItem
 import com.visualprogrammingclass.boncal.models.article.ArticleResponseItem
 import com.visualprogrammingclass.boncal.models.widgets.WidgetResponseItem
 import com.visualprogrammingclass.boncal.services.navigations.main.NavbarScreenChildren
@@ -52,6 +55,10 @@ fun HomeScreen(
             Log.d("HomeScreen", "getLatestWidgetData() completed")
         }
 
+        homeViewModel.getLatestReforestationProgram().invokeOnCompletion {
+            Log.d("HomeScreen", "getLatestReforestationProgram() completed")
+        }
+
 
         homeViewModel.saveUserDataWithToken().invokeOnCompletion {
             Log.d("HomeScreen", "saveUserDataWithToken() completed")
@@ -61,11 +68,8 @@ fun HomeScreen(
         }
     }
 
-//    homeViewModel.getLatestWidgetData()
 
     val widgets: State<ArrayList<WidgetResponseItem>?> = homeViewModel.widgets.observeAsState()
-//    val allWidgetImage: State<List<String>?> = homeViewModel.widgetImage.observeAsState(initial = null)
-//    val allWidgetUrl: State<List<String>?> = homeViewModel.widgetUrl.observeAsState(initial = null)
 
     Log.d("HomeScreen", "WidgetImage is ${widgets.value?.get(0)?.image}")
     Log.d("HomeScreen", "WidgetURL is ${widgets.value?.get(0)?.image}")
@@ -74,6 +78,8 @@ fun HomeScreen(
         Log.d("HomeScreen", "WidgetImage after is ${theWidgets.get(0).image}")
         Log.d("HomeScreen", "WidgetUrl after is ${theWidgets.get(0).data}")
     }
+
+    val reforestation: State<ArrayList<ReforestationFundsItem>?> = homeViewModel.reforestation.observeAsState()
 
     val userEmission: State<Double> = homeViewModel.userEmission.observeAsState(initial = 0.0)
     val articles: State<ArrayList<ArticleResponseItem>?> = homeViewModel.articles.observeAsState()
@@ -87,82 +93,140 @@ fun HomeScreen(
 //            .scrollable(state = scrollState, orientation = Orientation.Vertical)
     ) {
 
-        Column(
+        LazyColumn(
 //            modifier = Modifier
 //                .verticalScroll(scrollState)
 //                .weight(1F, fill = false)
         ) {
 
-//            item {
-            Spacer(modifier = Modifier.padding(10.dp))
+            item(key = 0) {
 
-            Text(
-                modifier = Modifier.padding(start = 12.dp),
-                text = "Daily Carbon Calculator",
-                style =
-                TextStyle(
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 24.sp,
-                    fontFamily = Inter
-                ),
-                color = foregroundColor(),
-            )
+                Spacer(modifier = Modifier.padding(10.dp))
 
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            val floatedValue = (Math.round(userEmission.value * 10.0) / 10.0)
-            Box(modifier = Modifier.padding(start = 12.dp, end = 12.dp)) {
-                TheCarbonFootprintWidget(
-                    onPlusButtonClick = {
-                        navController.navigate(NavbarScreenChildren.Category.route)
-                    },
-                    carbonKg = floatedValue.toString()
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = "Daily Carbon Calculator",
+                    style =
+                    TextStyle(
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 24.sp,
+                        fontFamily = Inter
+                    ),
+                    color = foregroundColor(),
                 )
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                val floatedValue = (Math.round(userEmission.value * 10.0) / 10.0)
+                Box(modifier = Modifier.padding(start = 12.dp, end = 12.dp)) {
+                    TheCarbonFootprintWidget(
+                        onPlusButtonClick = {
+                            navController.navigate(NavbarScreenChildren.Category.route)
+                        },
+                        carbonKg = floatedValue.toString()
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(12.dp))
+
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = "Local Resources",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        fontFamily = Inter
+                    ),
+                    color = foregroundColor(),
+                )
+
+                Spacer(modifier = Modifier.padding(4.dp))
+
             }
 
-            Spacer(modifier = Modifier.padding(12.dp))
-
-            Text(
-                modifier = Modifier.padding(start = 12.dp),
-                text = "Local Resources",
-                style = TextStyle(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp,
-                    fontFamily = Inter
-                ),
-                color = foregroundColor(),
-            )
-
-            Spacer(modifier = Modifier.padding(4.dp))
-
-            Row(
+            item(key = 2) {
+//                Row(
 //                    modifier = Modifier.size(100.dp),
 //                modifier = Modifier.background(Rose400)
-            ) {
+//                ) {
 
 //                    widgets.value?.let { createWidgetList(widgets = it) }
-                LazyRow(
-                    contentPadding = PaddingValues(all = 12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    LazyRow(
+
+                        contentPadding = PaddingValues(all = 12.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
 ////                    modifier = Modifier.fillMaxSize().background(Indigo600).wrapContentSize()
-                ) {
+                    ) {
 
-                    widgets.value?.let { listOfWidgets: ArrayList<WidgetResponseItem> ->
-                        items(count = listOfWidgets.size) { index ->
+                        widgets.value?.let { listOfWidgets: ArrayList<WidgetResponseItem> ->
+                            items(count = listOfWidgets.size) { index ->
 
-                            WidgetIconClickable(
-                                imageUrl = listOfWidgets[index].image,
-                                linkUrl = listOfWidgets[index].data, //data is URL
-                            )
+                                WidgetIconClickable(
+                                    imageUrl = listOfWidgets[index].image,
+                                    linkUrl = listOfWidgets[index].data, //data is URL
+                                )
 
+
+                            }
 
                         }
 
                     }
 
+//                }
+            }
+
+            item(key = 3) {
+                Spacer(modifier = Modifier.padding(4.dp))
+
+                Text(
+                    modifier = Modifier.padding(start = 12.dp),
+                    text = "Reforestation Programs",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        fontFamily = Inter
+                    ),
+                    color = foregroundColor(),
+                )
+
+                Spacer(modifier = Modifier.padding(2.dp))
+                // create a list here
+
+            }
+
+            item(key = 4){
+            LazyRow(
+                contentPadding = PaddingValues(all = 12.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier
+//                    .background(Indigo600)
+                    .wrapContentSize()
+//                modifier = Modifier.background(Rose400)
+            ) {
+
+                reforestation.value?.let { reforestationItems ->
+                    items(count = reforestationItems.size) { index ->
+                        Log.d("HomeScreen", "Reforestation item is Initialized}")
+                        val theTitle = if (reforestationItems[index].Name.length > 12) {
+                            "${reforestationItems[index].Name.take(12)}..."
+                        } else {
+                            reforestationItems[index].Name
+                        }
+
+                        ReforestationItemClickable(
+                            title = theTitle,
+                            imageUrl = reforestationItems[index].Logo,
+                            linkUrl = reforestationItems[index].Url,
+                        )
+                    }
+
                 }
 
             }
+            }
+
+            item(key = 5){
 
             Spacer(modifier = Modifier.padding(4.dp))
 
@@ -205,6 +269,8 @@ fun HomeScreen(
                 }
 
             }
+            }
+
 
 //                Spacer(Modifier.padding(10.dp))
 //

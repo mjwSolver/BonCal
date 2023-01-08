@@ -41,6 +41,8 @@ val DarkTeal = Color(0xFF115E59) // Teal800
 
 val BoncalGradient = Brush.horizontalGradient( listOf(Blue400, Emerald400) )
 
+val FadedBoncalGradient = Brush.horizontalGradient( listOf(Blue400.copy(alpha = 0.5f), Emerald400.copy(alpha = 0.5f)) )
+
 @Composable
 fun backgroundColor() = if(isSystemInDarkTheme()) Slate900 else Slate50
 

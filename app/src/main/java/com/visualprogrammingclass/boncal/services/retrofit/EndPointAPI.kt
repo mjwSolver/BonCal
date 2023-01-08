@@ -52,6 +52,17 @@ interface EndPointAPI {
     ): Response<ArrayListOfArticleResponse>
 
     // ============
+    // Reforestation
+    // ============
+
+    @GET("/api/reforestation-funds")
+    suspend fun getReforestationFunds(
+    ): Response<ReforestationListResponse>
+
+
+
+
+    // ============
     // ...
     // ============
 

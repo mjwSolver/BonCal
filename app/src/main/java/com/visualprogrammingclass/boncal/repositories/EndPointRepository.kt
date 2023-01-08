@@ -23,6 +23,8 @@ class EndPointRepository @Inject constructor(private val api: EndPointAPI) {
 
     suspend fun getArticleData() = api.getArticles()
 
+    suspend fun getReforestationPrograms() = api.getReforestationFunds()
+
     suspend fun getEmissionTypes(token:String) = api.getAvailableEmissionTypes(token = "Bearer $token")
 
     suspend fun sendCarbonEmissionData(
