@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -199,34 +200,52 @@ fun HomeScreen(
             }
 
             item(key = 4){
-            LazyRow(
-                contentPadding = PaddingValues(all = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier
-//                    .background(Indigo600)
-                    .wrapContentSize()
-//                modifier = Modifier.background(Rose400)
-            ) {
+                LazyRow(
+                    contentPadding = PaddingValues(all = 12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier
+    //                    .background(Indigo600)
+                        .wrapContentSize()
+    //                modifier = Modifier.background(Rose400)
+                ) {
 
-                reforestation.value?.let { reforestationItems ->
-                    items(count = reforestationItems.size) { index ->
-                        Log.d("HomeScreen", "Reforestation item is Initialized}")
-                        val theTitle = if (reforestationItems[index].Name.length > 12) {
-                            "${reforestationItems[index].Name.take(12)}..."
-                        } else {
-                            reforestationItems[index].Name
+                    reforestation.value?.let { reforestationItems ->
+                        items(count = reforestationItems.size) { index ->
+                            Log.d("HomeScreen", "Reforestation item is Initialized}")
+                            val theTitle = if (reforestationItems[index].Name.length > 12) {
+                                "${reforestationItems[index].Name.take(12)}..."
+                            } else {
+                                reforestationItems[index].Name
+                            }
+
+                            ReforestationItemClickable(
+                                title = theTitle,
+                                imageUrl = reforestationItems[index].Logo,
+                                linkUrl = reforestationItems[index].Url,
+                            )
                         }
 
-                        ReforestationItemClickable(
-                            title = theTitle,
-                            imageUrl = reforestationItems[index].Logo,
-                            linkUrl = reforestationItems[index].Url,
-                        )
                     }
 
                 }
 
-            }
+                Spacer(modifier = Modifier.padding(4.dp))
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 12.dp, end = 12.dp)
+                ){
+                    Text(
+                        text = "Disclaimer: *BonCal is not affiliated in any way with the listed fundraiser. Fundraiser listed should be treated only for informational purposes ",
+                        style = TextStyle(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 11.sp,
+                            fontFamily = Inter,
+                            color = foregroundColor()
+                        ),
+                    )
+                }
             }
 
             item(key = 5){

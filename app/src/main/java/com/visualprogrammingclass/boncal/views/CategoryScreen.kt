@@ -60,7 +60,7 @@ fun CategoryScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(26.dp)
+                .padding(12.dp)
                 .clip(boncalRoundedShape())
                 .background(Blue200),
             contentAlignment = Alignment.Center
@@ -92,6 +92,8 @@ fun CategoryScreen(
             }
         }
 
+        Spacer(modifier = Modifier.padding(10.dp))
+
         Text(
             text = "Select your Emission Type",
             style = TextStyle(
@@ -102,6 +104,8 @@ fun CategoryScreen(
             ),
         )
 
+        Spacer(modifier = Modifier.padding(10.dp))
+
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.padding(10.dp),
@@ -111,18 +115,16 @@ fun CategoryScreen(
 
                         val categoryInternalIndex = it[i].ID
                         val categoryAsString = it[i].toJson()
+                        val backgroundColor =
+                            Color(
+                                android.graphics.Color
+                                    .parseColor("#${it[i].BackgroundColor.takeLast(6)}")
+                            )
 
                         Box(
                             modifier = Modifier
-                                .aspectRatio(1F)
-                                .size(100.dp)
-                                .background(
-                                    color = Color(
-                                        android.graphics.Color
-                                            .parseColor("#${it[i].BackgroundColor.takeLast(6) }")
-                                    )
-                                )
                                 .clip(boncalRoundedShape())
+                                .background(color = backgroundColor)
                                 .padding(4.dp)
                                 .clickable(onClick = {
                                     navController.navigate(
@@ -135,7 +137,10 @@ fun CategoryScreen(
                             contentAlignment = Alignment.CenterStart,
                         ) {
 
+                            Spacer(modifier = Modifier.padding(10.dp))
+
                             Column(
+                                Modifier.background(Rose100),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.SpaceBetween,
 
@@ -154,6 +159,7 @@ fun CategoryScreen(
                                     ) }
                                 )
 
+                                Spacer(modifier = Modifier.padding(4.dp))
 
                                 Text(text = it[i].Name, style = TextStyle(
                                     color = Color(android.graphics.Color.parseColor("#${ it[i].ForegroundColor.takeLast(6) }"))
