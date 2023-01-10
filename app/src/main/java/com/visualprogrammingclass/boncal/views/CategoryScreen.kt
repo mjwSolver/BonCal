@@ -140,7 +140,7 @@ fun CategoryScreen(
                             Spacer(modifier = Modifier.padding(10.dp))
 
                             Column(
-                                Modifier.background(Rose100),
+//                                Modifier.background(Rose100),
                                 horizontalAlignment = Alignment.Start,
                                 verticalArrangement = Arrangement.SpaceBetween,
 
